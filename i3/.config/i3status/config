@@ -1,0 +1,49 @@
+general {
+        colors = true
+        interval = 5
+}
+
+order += "disk /home"
+order += "memory"
+order += "cpu_usage"
+order += "battery 0"
+order += "wireless _first_"
+order += "tztime local"
+
+cpu_usage {
+	format = "CPU %usage"
+}
+
+wireless _first_ {
+        format_up = "%essid (%bitrate,%quality) %ip"
+        format_down = "W: down"
+}
+
+battery 0 {
+        format = "%status %percentage %remaining remaining"
+        format_down = "No battery"
+        status_chr = "⚡"
+        status_bat = "🔋"
+        status_unk = "?"
+        status_full = "☻"
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M:%S"
+}
+
+memory {
+        format = "RAM %used / %total"
+        threshold_degraded = "10%"
+        format_degraded = "MEMORY: %free"
+}
+
+disk "/home" {
+        format = "Disk free: %free"
+}
+
+read_file uptime {
+        path = "/proc/uptime"
+}
