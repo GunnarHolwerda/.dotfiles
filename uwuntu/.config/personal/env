@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-export STOW_FOLDERS="bin,nvim,tmux,uwuntu,i3,zsh"
+export STOW_FOLDERS="bin,nvim,window-management,tmux,uwuntu,i3,zsh"
 export DOTFILES=$HOME/.dotfiles
 
 addToPath() {

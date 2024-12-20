@@ -195,4 +195,4 @@ bar {
 }
 
 ## Command to fix on high DPI screens so everything isn't for ants
-exec randr --dpi 160
+exec xrandr --dpi 160
