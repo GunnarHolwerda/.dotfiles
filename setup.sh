@@ -4,6 +4,16 @@ echo -e
 
 sudo apt update
 
+## Install important helper tools
+#### Status bar for i3
+sudo apt-get install i3 i3status
+#### Install brightnessctl for intel brightness ctrl (may need xbacklight instead if a different computer?)
+sudo apt-get install brightnessctl
+
+# Configuration
+## Add user to video group so we can use brightnessctl without needing sudo everytime
+sudo usermod -aG video $USER
+
 
 ## Install ZSH and Plugins
 sudo apt install zsh -y
@@ -15,4 +25,6 @@ sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O 
 ## Plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+echo "Please reboot the computer to continue setting up"
 

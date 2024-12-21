@@ -8,6 +8,7 @@ order += "memory"
 order += "cpu_usage"
 order += "battery 0"
 order += "wireless _first_"
+order += "volume master"
 order += "tztime local"
 
 cpu_usage {
@@ -38,6 +39,14 @@ memory {
         format = "RAM %used / %total"
         threshold_degraded = "10%"
         format_degraded = "MEMORY: %free"
+}
+
+volume master {
+	format = "♪: %volume"
+        format_muted = "♪: muted (%volume)"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
 }
 
 disk "/home" {
