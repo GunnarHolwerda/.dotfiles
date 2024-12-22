@@ -1,3 +1,2 @@
 require("gunnar.remap")
-require("gunnar.lazy")
-print("hello from gunnar")
+require("gunnar.init_lazy")
