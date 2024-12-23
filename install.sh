@@ -23,7 +23,7 @@ function log() {
 }
 
 # Convert to bash-compatible array handling
-pushd "./env" || exit
+pushd "./config" || exit
 
 # Convert comma-separated string to array and iterate
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")

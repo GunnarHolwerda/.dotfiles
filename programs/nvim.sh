@@ -1,6 +1,6 @@
 #/bin/bash
 ## Install important helper tools
-sudo apt-get install curl
+sudo apt-get install curl fzf
 
 # NVIM 
 ## Fonts
