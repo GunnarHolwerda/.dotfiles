@@ -7,6 +7,9 @@ return {
 	opts = {},
 	config = function()
 		require('telescope').setup {
+			defaults = {
+				file_ignore_patterns = {}
+			},
 			pickers = {
 				find_files = {
 					theme = "ivy"

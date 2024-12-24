@@ -14,3 +14,5 @@ addToPathFront() {
         export PATH=$1:$PATH
     fi
 }
+
+addToPath "$HOME/.local/bin"

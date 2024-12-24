@@ -1,6 +1,6 @@
 #/bin/bash
 ## Install important helper tools
-sudo apt-get install curl fzf
+sudo apt-get install curl luarocks ripgrep
 
 # NVIM 
 ## Fonts
@@ -10,10 +10,6 @@ unzip ~/.fonts/0xProto
 rm -rf ~/.fonts/0xProto.zip
 #### Manually rebuild the font cache
 fc-cache -fc
-
-## LuaRocks for LazyVim
-sudo apt-get install luarocks
-sudo apt-get install ripgrep fd-find
 
 ## Install nvim
 version="v0.10.2"
