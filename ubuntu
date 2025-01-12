@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 if [[ -z $REPO_DIR ]]; then
-    REPO_DIR=$HOME/code/.dotfiles
+    REPO_DIR=$HOME/.dotfiles
 fi
 
 sudo apt-get update

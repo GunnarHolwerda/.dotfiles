@@ -1,6 +1,6 @@
 #/bin/bash
 ## Install important helper tools
-sudo apt-get install curl luarocks ripgrep
+sudo apt-get install -y curl luarocks ripgrep
 
 ## Install nvim
 version="v0.10.2"

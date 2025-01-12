@@ -1,6 +1,6 @@
 #/bin/bash
 
-sudo apt-get install zsh -y
+sudo apt-get install -y zsh
 chsh -s $(which zsh)
 
 ## OhmyZSH
@@ -11,4 +11,3 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 mkdir ~/.local/bin
-
