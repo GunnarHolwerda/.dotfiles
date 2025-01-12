@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-export STOW_FOLDERS="bin,nvim,window-management,tmux,personal,i3,zsh"
-export DOTFILES=$HOME/.dotfiles
-
 addToPath() {
     if [[ "$PATH" != *"$1"* ]]; then
         export PATH=$PATH:$1

@@ -2,15 +2,6 @@
 ## Install important helper tools
 sudo apt-get install curl luarocks ripgrep
 
-# NVIM 
-## Fonts
-mkdir ~/.fonts
-wget -P ~/.fonts https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/0xProto.zip 
-unzip ~/.fonts/0xProto
-rm -rf ~/.fonts/0xProto.zip
-#### Manually rebuild the font cache
-fc-cache -fc
-
 ## Install nvim
 version="v0.10.2"
 if [ ! -z $NVIM_VERSION ]; then

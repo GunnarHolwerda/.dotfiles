@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+alias zfg="zed ~/.zshrc"
+alias dc="docker compose"
+alias cat="bat"
+alias gfg="zed $HOME/Library/Application\ Support/com.mitchellh.ghostty/config"

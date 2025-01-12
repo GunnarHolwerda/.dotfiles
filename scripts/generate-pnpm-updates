@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Get outdated packages in JSON format and process with jq
+pnpm outdated --json | jq -r 'to_entries[] | "pnpm update \(.key)@(.value.latest)"'
+
+echo -e "\n# Or update all at once:"
+echo "pnpm update --latest"

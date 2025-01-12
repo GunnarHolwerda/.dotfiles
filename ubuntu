@@ -1,12 +1,9 @@
 #!/usr/bin/env zsh
 
-if [[ -z $STOW_FOLDERS ]]; then
-    STOW_FOLDERS="bin,i3,nvim,window-management,personal,tmux,xkb,zsh"
+if [[ -z $REPO_DIR ]]; then
+    REPO_DIR=$HOME/code/.dotfiles
 fi
 
-if [[ -z $DOTFILES ]]; then
-    DOTFILES=$HOME/.dotfiles
-fi
+sudo apt-get update
 
-STOW_FOLDERS=$STOW_FOLDERS DOTFILES=$DOTFILES $DOTFILES/install.sh
-
+REPO_DIR=$REPO_DIR $REPO_DIR/install.sh "$@"

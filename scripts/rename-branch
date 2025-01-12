@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Check if a new branch name is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 new_branch_name"
+    exit 1
+fi
+
+# New branch name from the first argument
+NEW_BRANCH_NAME=$1
+
+# Current branch name using symbolic-ref
+CURRENT_BRANCH=$(git symbolic-ref --short HEAD)
+
+# Check for errors in getting the current branch name
+if [ $? -ne 0 ]; then
+    echo "Error: Could not determine the current branch. Are you in a git repository?"
+    exit 1
+fi
+
+# Rename the local branch
+git branch -m $NEW_BRANCH_NAME
+if [ $? -ne 0 ]; then
+    echo "Failed to rename the local branch to '$NEW_BRANCH_NAME'"
+    exit 1
+fi
+
+# Rename the remote branch
+git push origin :$CURRENT_BRANCH $NEW_BRANCH_NAME
+if [ $? -ne 0 ]; then
+    echo "Failed to delete the old remote branch '$CURRENT_BRANCH'"
+    exit 1
+fi
+
+git push origin -u $NEW_BRANCH_NAME
+if [ $? -ne 0 ]; then
+    echo "Failed to push the new branch name '$NEW_BRANCH_NAME' to remote"
+    exit 1
+fi
+
+# Set upstream for the new branch
+git branch --set-upstream-to=origin/$NEW_BRANCH_NAME $NEW_BRANCH_NAME
+
+echo "Branch '$CURRENT_BRANCH' has been renamed to '$NEW_BRANCH_NAME' locally and on the remote."

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [[ -z $REPO_DIR ]]; then
+    REPO_DIR=$HOME/code/.dotfiles
+fi
+
+## Install homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+REPO_DIR=$REPO_DIR $REPO_DIR/install.sh --mac "$@"
