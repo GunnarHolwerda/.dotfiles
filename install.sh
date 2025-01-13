@@ -13,11 +13,13 @@ fi
 
 DRY_RUN=0
 IS_MAC=0
+CONFIG_ONLY=0
 
 while [[ "$#" -gt 0 ]]; do
 	case $1 in
-		--dry) DRY_RUN=1 ;;
+	    --dry) DRY_RUN=1 ;;
 	    --mac) IS_MAC=1 ;;
+	    --config-only) CONFIG_ONLY=1 ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
 	esac
 	shift
@@ -116,10 +118,14 @@ function install_programs() {
     popd &> /dev/null
 }
 
-if [ $IS_MAC -eq 0 ]; then
-    install_programs "$REPO_DIR/programs/ubuntu"
+if [ $CONFIG_ONLY -eq 0 ]; then
+	if [ $IS_MAC -eq 0 ]; then
+		install_programs "$REPO_DIR/programs/ubuntu"
+	else
+		install_programs "$REPO_DIR/programs/mac"
+	fi
 else
-    install_programs "$REPO_DIR/programs/mac"
+	log "Skipping install as --config-only was specified"
 fi
 
 log "Run 'source ~/.zshrc' to setup shell"

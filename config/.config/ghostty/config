@@ -1,6 +1,8 @@
 font-family = "Fira Code"
 theme = Chalk
 shell-integration = zsh
+shell-integration-features = no-cursor
+cursor-style = block
 
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
 keybind = ctrl+a>r=reload_config
