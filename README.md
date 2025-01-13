@@ -9,7 +9,9 @@ I decided that the way I would structure this is actually keep the program insta
 ## Options
 
 `--dry-run` - print out all of the commands that would be run by the program instead of executing them
+
 `--config-only` - only copy configuration files and skip the program installation.
+
 
 ### Mac setup
 
