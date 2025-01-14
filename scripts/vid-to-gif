@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Check if at least one argument is provided
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 input_video [output_gif]"
+    exit 1
+fi
+
+input_video="$1"
+output_gif="${2:-output.gif}"
+
+# Check if the input file exists
+if [ ! -f "$input_video" ]; then
+    echo "Error: Input file '$input_video' does not exist"
+    exit 1
+fi
+
+# Check if ffmpeg is installed
+if ! command -v ffmpeg &> /dev/null; then
+    echo "Error: ffmpeg is not installed"
+    exit 1
+fi
+
+ffmpeg -i "$input_video" -vf "fps=15,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" "$output_gif"
+
+echo "Conversion complete: $output_gif"
