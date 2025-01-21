@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
 alias zfg="zed ~/.zshrc"
+alias zprofile="time ZSH_DEBUGRC=1 zsh -i -c exit"
 alias dc="docker compose"
 alias cat="bat"
 alias gfg="zed $HOME/Library/Application\ Support/com.mitchellh.ghostty/config"
