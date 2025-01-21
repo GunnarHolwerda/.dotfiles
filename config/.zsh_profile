@@ -5,5 +5,3 @@ PERSONAL=$XDG_CONFIG_HOME/personal
 for i in `find -L $PERSONAL`; do
     source $i
 done
-
-## All that sweet sweet fzf
