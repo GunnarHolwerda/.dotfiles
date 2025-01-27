@@ -5,3 +5,7 @@ PERSONAL=$XDG_CONFIG_HOME/personal
 for i in `find -L $PERSONAL`; do
     source $i
 done
+
+reload-zsh() {
+    source ~/.zshrc
+}
