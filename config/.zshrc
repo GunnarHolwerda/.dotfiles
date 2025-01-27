@@ -148,6 +148,13 @@ if [ -d "$HOME/.nvm" ]; then
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     npm "$@"
   }
+
+  pnpm() {
+    unset -f pnpm
+    # Load nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    pnpm "$@"
+  }
 fi
 
 if [[ -n "$ZSH_DEBUGRC" ]]; then
