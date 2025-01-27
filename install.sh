@@ -43,7 +43,7 @@ function update_files() {
 
     echo "Running following commands from: $(pwd)"
     (
-        configs=`find . -mindepth 1 -maxdepth 1 -type d`
+        configs=`find . -mindepth 1 -maxdepth 1 -type d -o -type f`
         for c in $configs; do
             directory=${2%/}/${c#./}
             log "    removing: rm -rf $directory"
