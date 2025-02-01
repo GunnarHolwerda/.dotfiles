@@ -1,8 +1,17 @@
-font-family = "Fira Code"
+font-family = "0xProto"
+font-size = 12
 theme = Chalk
 shell-integration = zsh
 shell-integration-features = no-cursor
 cursor-style = block
+
+macos-icon = custom-style
+macos-icon-screen-color = #222222
+macos-icon-ghost-color = #DDDDDD
+macos-icon-frame = aluminum
+
+background-blur = true
+background-opacity = 0.8
 
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
 keybind = ctrl+a>r=reload_config
