@@ -11,7 +11,7 @@ macos-icon-ghost-color = #DDDDDD
 macos-icon-frame = aluminum
 
 background-blur = true
-background-opacity = 0.8
+background-opacity = 0.9
 
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
 keybind = ctrl+a>r=reload_config
