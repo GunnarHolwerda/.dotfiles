@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 VER=`curl -s "https://api.github.com/repos/alexpasmantier/television/releases/latest" | grep '"tag_name":' | sed -E 's/.*"tag_name": "([^"]+)".*/\1/'`
-curl -LO https://github.com/alexpasmantier/television/releases/download/$VER/television_$VER-1_amd64.deb
-echo $VER
-sudo dpkg -i television_$VER-1_amd64.deb
+
+pushd /tmp
+curl -LO https://github.com/alexpasmantier/television/releases/download/$VER/tv-$VER-linux-x86_64.tar.gz
+curl -LO https://github.com/alexpasmantier/television/releases/download/$VER/tv-$VER-linux-x86_64.sha256
+tar -xzvf tv-$VER-linux-x86_64.tar.gz
+cp tv $HOME/.local/bin/
+popd
