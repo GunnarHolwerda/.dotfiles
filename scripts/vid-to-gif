@@ -21,6 +21,6 @@ if ! command -v ffmpeg &> /dev/null; then
     exit 1
 fi
 
-ffmpeg -i "$input_video" -vf "fps=15,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" "$output_gif"
+ffmpeg -i "$input_video" -vf "fps=30,scale=720:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" "$output_gif"
 
 echo "Conversion complete: $output_gif"
