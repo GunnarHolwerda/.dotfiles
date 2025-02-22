@@ -19,6 +19,12 @@ name = "git-branch"
 source_command = "git --no-pager branch --all --format=\"%(refname:short)\""
 preview_command = "git show -p --stat --pretty=fuller --color=always {0}"
 
+# All files, but stil ignore git files and the .git directory. Helps show you .github files and other . directorys or files common in code bases
+[[cable_channel]]
+name = "git-files"
+source_command = "fd --hidden --type file --exclude .git"
+preview_command = ":files:"
+
 # Docker
 [[cable_channel]]
 name = "docker-images"
