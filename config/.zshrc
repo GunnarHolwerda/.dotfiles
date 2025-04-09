@@ -149,6 +149,13 @@ if [ -d "$HOME/.nvm" ]; then
     npm "$@"
   }
 
+    npx() {
+        unset -f npx
+        # Load nvm
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        npx "$@"
+    }
+
   pnpm() {
     unset -f pnpm
     # Load nvm

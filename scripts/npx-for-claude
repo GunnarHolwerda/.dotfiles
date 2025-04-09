@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+export NVM_DIR="$HOME/.nvm"
+# Load nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Use the default node version
+nvm use default > /dev/null
+
+# Run npx with passed arguments
+exec npx "$@"
