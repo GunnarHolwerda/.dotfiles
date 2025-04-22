@@ -1,6 +1,6 @@
 font-family = "0xProto"
 font-size = 12
-theme = Chalk
+theme = ayu
 shell-integration = zsh
 shell-integration-features = no-cursor
 cursor-style = block
