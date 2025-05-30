@@ -8,5 +8,5 @@
   },
   "amp.mcp.disable": [],
   "amp.tools.disable": [],
-  "amp.commands.allowlist": ["pnpm", "git", "gh"]
+  "amp.commands.allowlist": ["pnpm", "git", "gh", "rm"]
 }
