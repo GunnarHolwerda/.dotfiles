@@ -1,0 +1,12 @@
+{
+  "amp.notifications.enabled": true,
+  "amp.mcpServers": {
+    "filesystem": {
+      "command": "/Users/gunnarholwerda/.local/bin/npx-for-claude",
+      "args": ["-y", "@playwright/mcp@latest"]
+    }
+  },
+  "amp.mcp.disable": [],
+  "amp.tools.disable": [],
+  "amp.commands.allowlist": ["pnpm", "git", "gh"]
+}
