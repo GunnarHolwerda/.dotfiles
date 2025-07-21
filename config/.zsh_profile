@@ -6,6 +6,8 @@ for i in `find -L $PERSONAL`; do
     source $i
 done
 
+export EDITOR=zed
+
 reload-zsh() {
     source ~/.zshrc
 }
