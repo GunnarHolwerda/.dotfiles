@@ -46,3 +46,9 @@ keybind = ctrl+a>0=goto_tab:10
 
 keybind = ctrl+a>u=last_tab
 keybind = ctrl+a>x=close_surface
+
+# Scroll up with keyboard
+keybind = ctrl+shift+k=scroll_page_lines:-5
+
+# Scroll down with keyboard
+keybind = ctrl+shift+j=scroll_page_lines:5
