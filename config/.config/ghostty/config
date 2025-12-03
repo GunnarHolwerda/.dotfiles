@@ -28,10 +28,10 @@ keybind = ctrl+a>j=goto_split:bottom
 keybind = ctrl+a>k=goto_split:top
 keybind = ctrl+a>l=goto_split:right
 
-keybind = ctrl+a>ctrl+h=resize_split:left,10
-keybind = ctrl+a>ctrl+j=resize_split:down,10
-keybind = ctrl+a>ctrl+k=resize_split:up,10
-keybind = ctrl+a>ctrl+l=resize_split:right,10
+keybind = super+h=resize_split:left,100
+keybind = super+j=resize_split:down,100
+keybind = super+k=resize_split:up,100
+keybind = super+l=resize_split:right,100
 
 keybind = ctrl+a>1=goto_tab:1
 keybind = ctrl+a>2=goto_tab:2
