@@ -5,10 +5,8 @@ shell-integration = zsh
 shell-integration-features = no-cursor
 cursor-style = block
 
-macos-icon = xray
-# macos-icon-screen-color = #222222
-# macos-icon-ghost-color = #DDDDDD
-# macos-icon-frame = aluminum
+macos-icon = custom
+macos-custom-icon = ~/.config/ghostty/Ghostty.png
 
 background-blur = true
 background-opacity = 0.9
@@ -52,3 +50,6 @@ keybind = ctrl+shift+k=scroll_page_lines:-5
 
 # Scroll down with keyboard
 keybind = ctrl+shift+j=scroll_page_lines:5
+
+# Claude Code Enter Support
+keybind = shift+enter=text:\x1b\r
