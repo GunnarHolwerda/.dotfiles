@@ -9,6 +9,6 @@ alias mcp="nvim /Users/gunnarholwerda/Library/Application\ Support/Claude/claude
 
 function cdg() {
     local dir
-    dir=$(tv git-repos) && cd "$dir"
+    dir=$(find ~/code -maxdepth 2 -type d ! -path ~/code | sed "s|$HOME/code/||" | fzf) && cd ~/code/"$dir"
 }
 

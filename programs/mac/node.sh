@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-brew install nvm
+brew install mise
 
-## Load NVM into current context
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# Load MISE into current context
+eval "$(mise activate zsh)"
 
-nvm install --lts
-nvm alias default node
+mise install --global node@22.13.1
 
-corepack enable pnpm
+corepack enable

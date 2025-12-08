@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-# Install Node Version Manager 
-PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash'
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-nvm install --lts
-nvm alias default node
+curl https://mise.run | sh
 
-corepack enable pnpm
-corepack use pnpm@latest-10
+# Load MISE into current context
+eval "$(mise activate zsh)"
+
+mise install --global node@22.13.1
+
+corepack enable

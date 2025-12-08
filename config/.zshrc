@@ -119,64 +119,7 @@ source $ZSH/oh-my-zsh.sh
 
 source ~/.zsh_profile
 
-export NVM_DIR="$HOME/.nvm"
-# Load nvm
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# Load bash completion
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# if [ -n "$IS_ZED" ] && [ "${IS_ZED,,}" = "true" ]; then
-#     export NVM_DIR="$HOME/.nvm"
-#     # Load nvm
-#     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-#     # Load bash completion
-#     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-# fi
-#
-# # Lazy load nvm
-# if [ -d "$HOME/.nvm" ]; then
-#   export NVM_DIR="$HOME/.nvm"
-#
-#   # Create a lazy loading function for nvm
-#   nvm() {
-#     unset -f nvm
-#     # Load nvm
-#     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-#     # Load bash completion
-#     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-#     # Call nvm with the provided arguments
-#     nvm "$@"
-#   }
-#
-#   # Create lazy load functions for node and npm
-#   node() {
-#     unset -f node
-#     # Load nvm
-#     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-#     node "$@"
-#   }
-#
-#   npm() {
-#     unset -f npm
-#     # Load nvm
-#     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-#     npm "$@"
-#   }
-#
-#     npx() {
-#         unset -f npx
-#         # Load nvm
-#         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-#         npx "$@"
-#     }
-#
-#   pnpm() {
-#     unset -f pnpm
-#     # Load nvm
-#     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-#     pnpm "$@"
-#   }
-# fi
+eval "$(mise activate zsh)"
 
 if [[ -n "$ZSH_DEBUGRC" ]]; then
   zprof
