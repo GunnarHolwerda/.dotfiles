@@ -34,8 +34,7 @@ function log() {
 }
 
 function update_files() {
-    log "copying over files from: $1 to $2"
-    pushd "$1"
+    log "symlinking files from: $1 to $2"
     if ! pushd "$1" &> /dev/null; then
         echo "Failed to pushd to $1"
         return 1
@@ -45,16 +44,17 @@ function update_files() {
     (
         configs=`find . -mindepth 1 -maxdepth 1 -type d -o -type f`
         for c in $configs; do
-            directory=${2%/}/${c#./}
-            log "    removing: rm -rf $directory"
+            target=${2%/}/${c#./}
+            source="$(pwd)/${c#./}"
+            log "    removing: rm -rf $target"
 
             if [[ $DRY_RUN == "0" ]]; then
-                rm -rf $directory
+                rm -rf $target
             fi
 
-            log "    copying env: cp $c $2"
+            log "    symlinking: ln -s $source $target"
             if [[ $DRY_RUN == "0" ]]; then
-                cp -r $c $2
+                ln -s "$source" "$target"
             fi
 
         done
