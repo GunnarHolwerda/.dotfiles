@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "disableBypassPermissionsMode": "disable"
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay -v 15 /System/Library/Sounds/Ping.aiff"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); cwd=$(echo \"$input\" | jq -r '.workspace.current_dir'); dir=$(basename \"$cwd\"); cd \"$cwd\" 2>/dev/null || true; if git -c core.useBuiltinFSMonitor=false rev-parse --git-dir > /dev/null 2>&1; then branch=$(git -c core.useBuiltinFSMonitor=false symbolic-ref --short HEAD 2>/dev/null || git -c core.useBuiltinFSMonitor=false rev-parse --short HEAD 2>/dev/null); if git -c core.useBuiltinFSMonitor=false diff --quiet 2>/dev/null && git -c core.useBuiltinFSMonitor=false diff --cached --quiet 2>/dev/null; then git_status=\"\"; else git_status=\" ✗\"; fi; git_info=\" git:(${branch})${git_status}\"; else git_info=\"\"; fi; printf \"\\033[1;32m➜\\033[0m  \\033[36m%s\\033[0m%s\" \"$dir\" \"$git_info\""
+  },
+  "enabledPlugins": {
+    "document-skills@anthropic-agent-skills": true
+  },
+  "alwaysThinkingEnabled": true,
+  "feedbackSurveyState": {
+    "lastShownTime": 1754071598024
+  }
+}

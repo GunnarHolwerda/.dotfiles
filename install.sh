@@ -86,6 +86,50 @@ function copy() {
     fi
 }
 
+function symlink_claude_config() {
+    log "symlinking claude config"
+    CLAUDE_DIR="$HOME/.claude"
+    CLAUDE_SRC="$REPO_DIR/config/.claude"
+
+    # Ensure ~/.claude and ~/.claude/plugins exist
+    if [[ $DRY_RUN == "0" ]]; then
+        mkdir -p "$CLAUDE_DIR"
+        mkdir -p "$CLAUDE_DIR/plugins"
+    fi
+
+    # Symlink settings.json
+    log "    removing: rm -f $CLAUDE_DIR/settings.json"
+    if [[ $DRY_RUN == "0" ]]; then
+        rm -f "$CLAUDE_DIR/settings.json"
+    fi
+    log "    symlinking: ln -s $CLAUDE_SRC/settings.json $CLAUDE_DIR/settings.json"
+    if [[ $DRY_RUN == "0" ]]; then
+        ln -s "$CLAUDE_SRC/settings.json" "$CLAUDE_DIR/settings.json"
+    fi
+
+    # Symlink commands directory
+    log "    removing: rm -rf $CLAUDE_DIR/commands"
+    if [[ $DRY_RUN == "0" ]]; then
+        rm -rf "$CLAUDE_DIR/commands"
+    fi
+    log "    symlinking: ln -s $CLAUDE_SRC/commands $CLAUDE_DIR/commands"
+    if [[ $DRY_RUN == "0" ]]; then
+        ln -s "$CLAUDE_SRC/commands" "$CLAUDE_DIR/commands"
+    fi
+
+    # Symlink plugin config files (not the cache directories)
+    for f in config.json installed_plugins.json known_marketplaces.json; do
+        log "    removing: rm -f $CLAUDE_DIR/plugins/$f"
+        if [[ $DRY_RUN == "0" ]]; then
+            rm -f "$CLAUDE_DIR/plugins/$f"
+        fi
+        log "    symlinking: ln -s $CLAUDE_SRC/plugins/$f $CLAUDE_DIR/plugins/$f"
+        if [[ $DRY_RUN == "0" ]]; then
+            ln -s "$CLAUDE_SRC/plugins/$f" "$CLAUDE_DIR/plugins/$f"
+        fi
+    done
+}
+
 log "env: $REPO_DIR"
 
 if [ ! -d "$HOME/.local/bin" ]; then
@@ -96,6 +140,7 @@ copy_dir "$REPO_DIR/scripts" "$HOME/.local/bin"
 update_files "$REPO_DIR/config/.config" $XDG_CONFIG_HOME
 copy "$REPO_DIR/config/.zshrc" "$HOME/.zshrc"
 copy "$REPO_DIR/config/.zsh_profile" "$HOME/.zsh_profile"
+symlink_claude_config
 
 if [ $IS_MAC -eq 0 ]; then
     copy "$REPO_DIR/config/.Xresources" "$HOME/.Xresources"
