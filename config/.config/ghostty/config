@@ -5,13 +5,18 @@ shell-integration = zsh
 shell-integration-features = no-cursor
 cursor-style = block
 
+bell-features = title,border
+
 macos-icon = custom
 macos-custom-icon = ~/.config/ghostty/Ghostty.png
 
 background-blur = true
 background-opacity = 0.9
+split-divider-color = #B38F47
+unfocused-split-opacity = 0.67
 
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
+quick-terminal-position = bottom
 keybind = ctrl+a>r=reload_config
 keybind = ctrl+a>shift+n=new_window
 keybind = ctrl+a>n=new_tab
