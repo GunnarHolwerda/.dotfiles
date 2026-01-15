@@ -1,20 +1,13 @@
 {
   "amp.notifications.enabled": true,
-  "amp.mcpServers": {
-    "playwright": {
-      "command": "/Users/gunnarholwerda/.local/bin/npx-for-claude",
-      "args": ["-y", "@playwright/mcp@latest"]
-    },
-    "linear": {
-      "command": {
-        "path": "/Users/gunnarholwerda/.local/bin/npx-for-claude",
-        "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"],
-        "env": {}
-      },
-      "settings": {}
-    }
-  },
+  "amp.mcpServers": {},
   "amp.mcp.disable": [],
   "amp.tools.disable": [],
-  "amp.commands.allowlist": ["pnpm", "git", "gh", "rm"]
+  "amp.commands.allowlist": [
+    "pnpm",
+    "git",
+    "gh",
+    "rm"
+  ],
+  "amp.dangerouslyAllowAll": true
 }
