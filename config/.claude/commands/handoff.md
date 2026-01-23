@@ -44,7 +44,8 @@ Your task is to analyze this entire conversation and generate a comprehensive ha
 
 3. **Copy to clipboard** using `pbcopy` on macOS (or `xclip`/`xsel` on Linux) so the user can immediately paste it into a new thread.
 
-4. **Also display the prompt** so the user can review it before pasting.
+4. End.
+
 
 ## Guidelines
 

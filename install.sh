@@ -117,8 +117,8 @@ function symlink_claude_config() {
         ln -s "$CLAUDE_SRC/commands" "$CLAUDE_DIR/commands"
     fi
 
-    # Symlink plugin config files (not the cache directories)
-    for f in config.json installed_plugins.json known_marketplaces.json; do
+    # Symlink plugin config files (not the cache directories or marketplace data)
+    for f in config.json installed_plugins.json; do
         log "    removing: rm -f $CLAUDE_DIR/plugins/$f"
         if [[ $DRY_RUN == "0" ]]; then
             rm -f "$CLAUDE_DIR/plugins/$f"
