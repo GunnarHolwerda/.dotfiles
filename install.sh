@@ -117,6 +117,16 @@ function symlink_claude_config() {
         ln -s "$CLAUDE_SRC/commands" "$CLAUDE_DIR/commands"
     fi
 
+    # Symlink agents directory (custom subagents)
+    log "    removing: rm -rf $CLAUDE_DIR/agents"
+    if [[ $DRY_RUN == "0" ]]; then
+        rm -rf "$CLAUDE_DIR/agents"
+    fi
+    log "    symlinking: ln -s $CLAUDE_SRC/agents $CLAUDE_DIR/agents"
+    if [[ $DRY_RUN == "0" ]]; then
+        ln -s "$CLAUDE_SRC/agents" "$CLAUDE_DIR/agents"
+    fi
+
     # Symlink plugin config files (not the cache directories or marketplace data)
     for f in config.json installed_plugins.json; do
         log "    removing: rm -f $CLAUDE_DIR/plugins/$f"

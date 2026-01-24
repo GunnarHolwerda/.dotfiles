@@ -8,17 +8,35 @@ return {
 	config = function()
 		require('telescope').setup {
 			defaults = {
-				file_ignore_patterns = {}
+				file_ignore_patterns = {
+					"node_modules/",
+					".git/",
+					"vendor/",
+					"%.lock",
+					"__pycache__/",
+					"%.pyc",
+					"target/",
+					"build/",
+					"dist/",
+					"%.class",
+				}
 			},
 			pickers = {
 				find_files = {
-					theme = "ivy"
+					theme = "ivy",
+					hidden = true,
+					no_ignore = true,  -- Show files even if in .gitignore
 				},
 				git_files = {
 					theme = "dropdown"
 				},
 				grep_string = {
-					theme = "ivy"
+					theme = "ivy",
+					additional_args = { "--hidden", "--no-ignore" }
+				},
+				live_grep = {
+					theme = "ivy",
+					additional_args = { "--hidden", "--no-ignore" }
 				}
 			},
 			extensions = {
@@ -29,10 +47,10 @@ return {
 		require('telescope').load_extension('fzf')
 
 		local builtin = require('telescope.builtin')
-		-- Search all files in directory (for some reason excludes git files?
 		vim.keymap.set('n', '<leader>fp', builtin.find_files)
 		vim.keymap.set('n', '<leader>fh', builtin.help_tags)
-		vim.keymap.set('n', '<C-p>', builtin.git_files)
+		vim.keymap.set('n', '<C-p>', builtin.find_files)
+		vim.keymap.set('n', '<D-p>', builtin.find_files)  -- Cmd+p (requires terminal support)
 		vim.keymap.set('n', '<leader>ps', function()
 		builtin.grep_string({ search = vim.fn.input("Grep > ") })
 		end, { desc = 'Telescope project search' })
