@@ -4,10 +4,10 @@
     "document-skills@anthropic-agent-skills": [
       {
         "scope": "user",
-        "installPath": "/Users/gunnarholwerda/.claude/plugins/cache/anthropic-agent-skills/document-skills/69c0b1a06741",
+        "installPath": "/Users/gunnar/.claude/plugins/cache/anthropic-agent-skills/document-skills/69c0b1a06741",
         "version": "69c0b1a06741",
-        "installedAt": "2026-01-24T16:52:05.392Z",
-        "lastUpdated": "2026-01-24T16:52:05.392Z",
+        "installedAt": "2026-01-31T21:28:30.182Z",
+        "lastUpdated": "2026-01-31T21:28:30.182Z",
         "gitCommitSha": "69c0b1a0674149f27b61b2635f935524b6add202"
       }
     ]
