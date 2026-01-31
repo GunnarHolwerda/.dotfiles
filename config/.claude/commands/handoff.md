@@ -6,7 +6,15 @@ The user wants to hand off the current work to a new thread with the following g
 
 **Goal:** $ARGUMENTS
 
-Your task is to analyze this entire conversation and generate a comprehensive handoff prompt that can be used to start a new Claude Code thread. The new thread should have all the context needed to continue working toward the specified goal.
+Use the Task tool to spawn a sub-agent with `subagent_type: "general-purpose"` and `model: "haiku"`. The sub-agent has access to the current conversation context.
+
+Give the sub-agent this prompt:
+
+---
+
+Analyze this entire conversation and generate a comprehensive handoff prompt that can be used to start a new Claude Code thread. The new thread should have all the context needed to continue working toward the following goal:
+
+**Goal:** $ARGUMENTS
 
 ## Instructions
 
@@ -17,7 +25,7 @@ Your task is to analyze this entire conversation and generate a comprehensive ha
    - Any gotchas, edge cases, or issues discovered
    - Relevant file paths and their purposes
 
-2. **Generate a handoff prompt** with this structure:
+2. **Generate a handoff prompt** with this structure (output ONLY the prompt text, nothing else):
 
 ```
 ## Context
@@ -42,11 +50,6 @@ Your task is to analyze this entire conversation and generate a comprehensive ha
 [Provide 2-4 concrete next steps to accomplish the goal]
 ```
 
-3. **Copy to clipboard** using `pbcopy` on macOS (or `xclip`/`xsel` on Linux) so the user can immediately paste it into a new thread.
-
-4. End.
-
-
 ## Guidelines
 
 - Be concise but comprehensive - include everything needed, nothing extra
@@ -55,11 +58,6 @@ Your task is to analyze this entire conversation and generate a comprehensive ha
 - Preserve any important constraints or requirements discovered during the conversation
 - Make the prompt self-contained so the new thread needs no additional context
 
-## Clipboard
+---
 
-After generating the prompt, copy it to the clipboard using a bash command like:
-```bash
-echo "YOUR_GENERATED_PROMPT" | pbcopy
-```
-
-Then confirm to the user that it has been copied and is ready to paste into a new thread.
+Once the sub-agent returns the handoff prompt, copy it to the clipboard using `pbcopy` on macOS (or `xclip`/`xsel` on Linux), then confirm to the user that it has been copied and is ready to paste into a new thread.

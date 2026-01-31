@@ -100,10 +100,23 @@
       "mcp__chrome-devtools__wait_for",
       "mcp__chrome-devtools__take_screenshot",
       "mcp__chrome-devtools__evaluate_script",
-      "mcp__chrome-devtools__navigate_page"
+      "mcp__chrome-devtools__navigate_page",
+      "Bash(pnpm:*)",
+      "mcp__chrome-devtools__list_network_requests",
+      "mcp__chrome-devtools__get_network_request",
+      "Bash(gh pr edit:*)",
+      "mcp__chrome-devtools__select_page",
+      "mcp__chrome-devtools__list_console_messages",
+      "Bash(gh issue view:*)",
+      "Bash(gh search:*)",
+      "mcp__acp__Edit",
+      "mcp__acp__Bash",
+      "Bash(gh run view:*)",
+      "WebFetch(domain:worktrunk.dev)",
+      "Bash(git grep:*)"
     ],
     "deny": [],
-    "defaultMode": "dontAsk",
+    "defaultMode": "acceptEdits",
     "disableBypassPermissionsMode": "disable"
   },
   "hooks": {
@@ -120,7 +133,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bunx ccstatusline",
+    "command": "bunx -y @owloops/claude-powerline@latest --style=powerline",
     "padding": 0
   },
   "enabledPlugins": {
