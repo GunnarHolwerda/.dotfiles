@@ -1,0 +1,113 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      // "j k": ["workspace::SendKeystrokes", "escape"]
+    },
+  },
+  {
+    "context": "Dock || (Editor && vim_mode == normal)",
+    "bindings": {
+      "ctrl-a h": "workspace::ActivatePaneLeft",
+      "ctrl-a l": "workspace::ActivatePaneRight",
+      "ctrl-a k": "workspace::ActivatePaneUp",
+      "ctrl-a j": "workspace::ActivatePaneDown",
+      // ... or other keybindings
+    },
+  },
+  // Project file search, command palette
+  {
+    "bindings": {
+      "cmd-j": "menu::SelectNext",
+      "cmd-k": "menu::SelectPrevious",
+    },
+  },
+
+  // Code Actions, Autocomplete
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "cmd-j": "editor::ContextMenuNext",
+      "cmd-k": "editor::ContextMenuPrevious",
+    },
+  },
+  // Surround vim
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "shift-s": ["vim::PushChangeSurrounds", {}],
+    },
+  },
+  // Pane Navigation from Project Panel
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "alt-h": "workspace::ActivatePaneLeft",
+      "alt-j": "workspace::ActivatePaneDown",
+      "alt-k": "workspace::ActivatePaneUp",
+      "alt-l": "workspace::ActivatePaneRight",
+    },
+  },
+  // Switch files easily
+  {
+    "bindings": {
+      "ctrl-shift-tab": "pane::ActivatePreviousItem",
+      "ctrl-tab": "pane::ActivateNextItem",
+    },
+  },
+  // {
+  //   "bindings": {
+  //     // replace file_finder::Toggle
+  //     "cmd-p": [
+  //       "task::Spawn",
+  //       { "task_name": "File Finder (tv)", "reveal_target": "center" }
+  //     ]
+  //   }
+  // },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space f w": [
+        "task::Spawn",
+        { "task_name": "Live Grep", "reveal_target": "center" },
+      ],
+      "space t": ["task::Spawn", { "task_name": "Test file" }],
+      "ctrl-c": "vim::SwitchToNormalMode",
+      "space p": "project_panel::ToggleFocus",
+      "space g": "git_panel::ToggleFocus",
+      "space s": "editor::SplitSelectionIntoLines",
+      "space d": "debugger::Start",
+      "space h": "pane::SplitAndMoveLeft",
+      "space l": "pane::SplitAndMoveRight",
+      "space j": "pane::SplitAndMoveDown",
+      "space k": "pane::SplitAndMoveUp",
+    },
+  },
+  // Move highlighted text up or downj
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "shift-j": ["workspace::SendKeystrokes", ":m '>+1<CR>gv=gv"],
+      "shift-k": ["workspace::SendKeystrokes", ":m '<-2<CR>gv=gv"],
+    },
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "space tab": "pane::AlternateFile",
+    },
+  },
+]

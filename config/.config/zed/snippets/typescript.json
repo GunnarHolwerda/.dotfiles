@@ -1,0 +1,27 @@
+{
+  "Print to console": {
+    "prefix": "clg",
+    "body": ["console.log(`$1`);"],
+    "description": "Log output to console"
+  },
+  "arrow function": {
+    "prefix": "anfn",
+    "body": ["($1) => {\n\t$2\n}"],
+    "description": "Regular anonymous arrow function"
+  },
+  "async arrow function": {
+    "prefix": "anfna",
+    "body": ["async ($1) => {\n\t$2\n}"],
+    "description": "Regular anonymous arrow function"
+  },
+  "it function": {
+    "prefix": "it",
+    "body": ["it('should $1', () => {\n\t$2\n});"],
+    "description": "Generates a jasmine it function"
+  },
+  "describe function": {
+    "prefix": "describe",
+    "body": ["describe('$1', () => {\n\t$2\n});"],
+    "description": "Generates a jasmine describe function"
+  }
+}

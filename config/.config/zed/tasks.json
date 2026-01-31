@@ -1,0 +1,35 @@
+// Static tasks configuration.
+//
+// Example:
+[
+  {
+    "label": "File Finder (tv)",
+    "command": "zed \"$(tv git-files)\"",
+    "hide": "always",
+    "allow_concurrent_runs": false,
+    "use_new_terminal": false,
+    "shell": {
+      "program": "sh"
+    }
+  },
+  {
+    "label": "File Finder (fzf)",
+    "command": "zed \"$(fzf)\"",
+    "hide": "always",
+    "allow_concurrent_runs": false,
+    "use_new_terminal": false,
+    "shell": {
+      "program": "sh"
+    }
+  },
+  {
+    "label": "Live Grep",
+    "command": "zed \"$(tv text)\"",
+    "hide": "always",
+    "allow_concurrent_runs": false,
+    "use_new_terminal": false,
+    "shell": {
+      "program": "sh"
+    }
+  }
+]

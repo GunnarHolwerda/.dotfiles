@@ -1,0 +1,206 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+      },
+      "enable_lsp_tasks": true,
+    },
+  },
+  "colorize_brackets": true,
+  "ssh_connections": [
+    {
+      "host": "build-mac-mini",
+      "username": "gunnar",
+      "args": [],
+      "projects": [
+        {
+          "paths": ["/Users/gunnar/code/em1"],
+        },
+      ],
+    },
+  ],
+  "use_system_window_tabs": true,
+  "title_bar": {
+    "show_menus": false,
+    "show_branch_icon": true,
+  },
+  "outline_panel": {
+    "default_width": 200.0,
+    "indent_size": 10.0,
+  },
+  "git": {
+    "hunk_style": "unstaged_hollow",
+    "inline_blame": {
+      "show_commit_summary": true,
+    },
+  },
+  "buffer_font_weight": 400.0,
+  "formatter": "prettier",
+  "agent_servers": {
+    "claude": {
+      "default_mode": "acceptEdits",
+    },
+  },
+  "edit_predictions": {
+    "disabled_globs": [".env", ".env.*"],
+    "mode": "eager",
+    "copilot": {
+      "proxy": null,
+      "proxy_no_verify": null,
+    },
+    "enabled_in_text_threads": true,
+  },
+  "status_bar": {
+    "active_language_button": true,
+  },
+  "use_system_prompts": true, // Always use ZED UI prompts instead of MAC UI system prompts which arent as good
+  "project_panel": {
+    "hide_root": false,
+    "hide_hidden": false,
+    "hide_gitignore": false,
+    "indent_size": 10.0,
+    "entry_spacing": "standard",
+    "default_width": 200.0,
+    "dock": "left",
+  },
+  "icon_theme": "Catppuccin Frappé",
+  "show_edit_predictions": true,
+  "features": {
+    "edit_prediction_provider": "zed",
+  },
+  "vim_mode": true,
+  "vim": {
+    "toggle_relative_line_numbers": true,
+    "highlight_on_yank_duration": 150,
+  },
+  "ui_font_size": 13,
+  "ui_font_family": "0xProto",
+  "buffer_font_size": 13,
+  "buffer_font_family": "0xProto",
+  "agent": {
+    "use_modifier_to_send": true,
+    "play_sound_when_agent_done": true,
+    "inline_assistant_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-7-sonnet-latest",
+    },
+    "always_allow_tool_actions": true,
+    "profiles": {
+      "write": {
+        "name": "Write",
+        "tools": {
+          "terminal": true,
+          "batch_tool": true,
+          "code_symbols": true,
+          "copy_path": false,
+          "create_file": true,
+          "delete_path": false,
+          "diagnostics": true,
+          "edit_file": true,
+          "fetch": true,
+          "list_directory": true,
+          "move_path": false,
+          "now": true,
+          "find_path": true,
+          "read_file": true,
+          "grep": true,
+          "symbol_info": true,
+          "thinking": true,
+        },
+        "enable_all_context_servers": true,
+        "context_servers": {
+          "postgres-context-server": {
+            "tools": {
+              "pg-schema": true,
+            },
+          },
+        },
+      },
+    },
+    "default_profile": "write",
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-sonnet-4-thinking",
+    },
+    "enabled": true,
+    "button": true,
+    "dock": "right",
+    "default_height": 320,
+    "default_width": 640,
+  },
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "One Dark Pro",
+  },
+  "autosave": "on_focus_change",
+  "tabs": {
+    "file_icons": true,
+    "git_status": true,
+    "show_diagnostics": "errors",
+  },
+  "wrap_guides": [80],
+  "format_on_save": "on", //
+  "languages": {
+    "TypeScript": {
+      "formatter": ["prettier"],
+      "code_actions_on_format": {
+        "source.organizeImports": true,
+        "source.fixAll.eslint": true,
+      },
+    },
+    "TSX": {
+      "formatter": ["prettier"],
+      "code_actions_on_format": {
+        "source.organizeImports": true,
+        "source.fixAll.eslint": true,
+      },
+    },
+    "Go": {
+      "formatter": "language_server",
+      "format_on_save": "on",
+    },
+  },
+  "use_smartcase_search": true,
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/.next",
+    // "**/node_modules"
+  ],
+  "terminal": {
+    "font_family": "0xProto",
+    "font_size": 12,
+  },
+  "context_servers": {
+    "playwright": {
+      "enabled": false,
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
+    },
+  },
+}

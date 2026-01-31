@@ -35,6 +35,7 @@ function log() {
 
 function update_files() {
     log "symlinking files from: $1 to $2"
+    local exclude="$3"
     if ! pushd "$1" &> /dev/null; then
         echo "Failed to pushd to $1"
         return 1
@@ -44,6 +45,11 @@ function update_files() {
     (
         configs=`find . -mindepth 1 -maxdepth 1 -type d -o -type f`
         for c in $configs; do
+            # Skip excluded directory
+            if [[ -n "$exclude" && "${c#./}" == "$exclude" ]]; then
+                log "    skipping: $c (excluded)"
+                continue
+            fi
             target=${2%/}/${c#./}
             source="$(pwd)/${c#./}"
             log "    removing: rm -rf $target"
@@ -140,6 +146,39 @@ function symlink_claude_config() {
     done
 }
 
+function symlink_zed_config() {
+    log "symlinking zed config"
+    ZED_DIR="$XDG_CONFIG_HOME/zed"
+    ZED_SRC="$REPO_DIR/config/.config/zed"
+
+    # Ensure ~/.config/zed and snippets dir exist
+    if [[ $DRY_RUN == "0" ]]; then
+        mkdir -p "$ZED_DIR"
+    fi
+
+    # Symlink individual config files
+    for f in settings.json keymap.json tasks.json; do
+        log "    removing: rm -f $ZED_DIR/$f"
+        if [[ $DRY_RUN == "0" ]]; then
+            rm -f "$ZED_DIR/$f"
+        fi
+        log "    symlinking: ln -s $ZED_SRC/$f $ZED_DIR/$f"
+        if [[ $DRY_RUN == "0" ]]; then
+            ln -s "$ZED_SRC/$f" "$ZED_DIR/$f"
+        fi
+    done
+
+    # Symlink snippets directory
+    log "    removing: rm -rf $ZED_DIR/snippets"
+    if [[ $DRY_RUN == "0" ]]; then
+        rm -rf "$ZED_DIR/snippets"
+    fi
+    log "    symlinking: ln -s $ZED_SRC/snippets $ZED_DIR/snippets"
+    if [[ $DRY_RUN == "0" ]]; then
+        ln -s "$ZED_SRC/snippets" "$ZED_DIR/snippets"
+    fi
+}
+
 log "env: $REPO_DIR"
 
 if [ ! -d "$HOME/.local/bin" ]; then
@@ -147,10 +186,11 @@ if [ ! -d "$HOME/.local/bin" ]; then
 fi
 copy_dir "$REPO_DIR/scripts" "$HOME/.local/bin"
 
-update_files "$REPO_DIR/config/.config" $XDG_CONFIG_HOME
+update_files "$REPO_DIR/config/.config" $XDG_CONFIG_HOME "zed"
 copy "$REPO_DIR/config/.zshrc" "$HOME/.zshrc"
 copy "$REPO_DIR/config/.zsh_profile" "$HOME/.zsh_profile"
 symlink_claude_config
+symlink_zed_config
 
 if [ $IS_MAC -eq 0 ]; then
     copy "$REPO_DIR/config/.Xresources" "$HOME/.Xresources"
