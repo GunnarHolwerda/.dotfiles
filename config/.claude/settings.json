@@ -120,12 +120,12 @@
     "disableBypassPermissionsMode": "disable"
   },
   "hooks": {
-    "Notification": [
+    "Stop": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "afplay -v 15 /System/Library/Sounds/Ping.aiff"
+            "command": "afplay -v 15 /System/Library/Sounds/Ping.aiff &"
           }
         ]
       }
@@ -133,7 +133,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bunx -y @owloops/claude-powerline@latest --style=powerline",
+    "command": "bunx -y ccstatusline@latest",
     "padding": 0
   },
   "enabledPlugins": {

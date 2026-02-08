@@ -94,6 +94,7 @@
       "space l": "pane::SplitAndMoveRight",
       "space j": "pane::SplitAndMoveDown",
       "space k": "pane::SplitAndMoveUp",
+      "space w": "projects::OpenRecent",
     },
   },
   // Move highlighted text up or downj

@@ -2,9 +2,11 @@
 description: Generate a handoff prompt to continue work in a new thread
 ---
 
-The user wants to hand off the current work to a new thread with the following goal:
+The user wants to hand off the current work to a new thread.
 
-**Goal:** $ARGUMENTS
+**User's goal for the new thread:** $ARGUMENTS
+
+If $ARGUMENTS is empty, vague (e.g., "continue", "fix"), or less than a few words, ask the user to provide a more specific goal before proceeding. A good goal describes what they want to accomplish next.
 
 Use the Task tool to spawn a sub-agent with `subagent_type: "general-purpose"` and `model: "haiku"`. The sub-agent has access to the current conversation context.
 
@@ -12,52 +14,58 @@ Give the sub-agent this prompt:
 
 ---
 
-Analyze this entire conversation and generate a comprehensive handoff prompt that can be used to start a new Claude Code thread. The new thread should have all the context needed to continue working toward the following goal:
+Extract relevant context from the conversation above for continuing this work in a new thread.
 
-**Goal:** $ARGUMENTS
+## What to Extract
 
-## Instructions
+### Relevant Files
 
-1. **Analyze the conversation** to identify:
-   - What work has been completed
-   - Key decisions that were made and why
-   - Important context about the codebase, architecture, or constraints
-   - Any gotchas, edge cases, or issues discovered
-   - Relevant file paths and their purposes
+Identify files from the conversation that are:
+- Directly related to accomplishing the goal below
+- Contain reference code or patterns to follow
+- Will need to be read, edited, or created
+- Provide important context or constraints
 
-2. **Generate a handoff prompt** with this structure (output ONLY the prompt text, nothing else):
+**Only include files that were actually mentioned, read, or edited in this conversation.** Do not guess or infer file paths that weren't explicitly referenced.
+
+### Relevant Information
+
+Consider what would be useful to know based on the user's goal below. Questions that might be relevant:
+- What was just done or implemented?
+- What instructions did the user give that are still relevant (e.g., follow certain patterns, use specific libraries)?
+- Was there a plan or spec that should be carried forward?
+- What important constraints or preferences were stated (libraries, patterns, conventions)?
+- What technical details were discovered (APIs, methods, architecture)?
+- What caveats, limitations, or open questions came up?
+- What commands need to be run (build, test, lint)?
+
+## Output Format
+
+Output ONLY the following, nothing else:
 
 ```
-## Context
-
-[Summarize the relevant background, what was worked on, and current state]
-
 ## Key Files
 
-[List the most relevant files for the new goal with brief descriptions]
-- `path/to/file.ts` - description of what it does/contains
+- `path/to/file.ts` - brief description of relevance
+- ...
 
-## Important Details
+## Context
 
-[Include any critical information: decisions made, constraints discovered, patterns to follow, things to avoid]
+[Extracted relevant information as concise bullet points. Include decisions made, constraints discovered, patterns to follow, things to avoid. Do not write new instructions — only extract what was discussed.]
 
 ## Goal
 
-[Restate and clarify the goal for the new thread]
-
-## Suggested Next Steps
-
-[Provide 2-4 concrete next steps to accomplish the goal]
+$ARGUMENTS
 ```
 
 ## Guidelines
 
-- Be concise but comprehensive - include everything needed, nothing extra
-- Focus on information relevant to the specified goal
-- Include specific file paths, function names, and code patterns when relevant
-- Preserve any important constraints or requirements discovered during the conversation
-- Make the prompt self-contained so the new thread needs no additional context
+- Extract, don't generate. Pull information from the conversation rather than writing new instructions.
+- Be concise — include everything needed, nothing extra.
+- Prioritize files by importance to the goal.
+- Preserve specific details: function names, API endpoints, config values, error messages.
+- The user's goal statement IS the instruction. Don't rephrase or expand it.
 
 ---
 
-Once the sub-agent returns the handoff prompt, copy it to the clipboard using `pbcopy` on macOS (or `xclip`/`xsel` on Linux), then confirm to the user that it has been copied and is ready to paste into a new thread.
+Once the sub-agent returns the handoff prompt, copy it to the clipboard using `pbcopy` on macOS (or `xclip`/`xsel` on Linux), then show the user the generated prompt and confirm it has been copied. Remind them they can edit it after pasting into the new thread.
