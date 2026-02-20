@@ -7,6 +7,9 @@ alias cat="bat"
 alias gfg="zed $XDG_CONFIG_HOME/ghostty/config"
 alias wtn="wt switch --create"
 alias wtc="wt switch --create --execute=claude"
+function wtl() {
+    wt switch --create "$1" -x claude -- -p 'Please implement the linear ticket associated with this branch. You should have enough context from the ticket to implement it, if you don'\''t or run into something that requires a second opinion because it could be a large change. Please stop and ask for clarification'
+}
 
 function cdg() {
     local dir
