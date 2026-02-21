@@ -8,13 +8,7 @@ The user wants to hand off the current work to a new thread.
 
 If $ARGUMENTS is empty, vague (e.g., "continue", "fix"), or less than a few words, ask the user to provide a more specific goal before proceeding. A good goal describes what they want to accomplish next.
 
-Use the Task tool to spawn a sub-agent with `subagent_type: "general-purpose"` and `model: "haiku"`. The sub-agent has access to the current conversation context.
-
-Give the sub-agent this prompt:
-
----
-
-Extract relevant context from the conversation above for continuing this work in a new thread.
+Extract relevant context from this conversation for continuing the work in a new thread. Do NOT use a sub-agent — write the handoff directly since you have full conversation context.
 
 ## What to Extract
 
@@ -38,6 +32,8 @@ Consider what would be useful to know based on the user's goal below. Questions 
 - What technical details were discovered (APIs, methods, architecture)?
 - What caveats, limitations, or open questions came up?
 - What commands need to be run (build, test, lint)?
+
+**Do NOT include information that is already covered by the project's CLAUDE.md file.** The new thread will automatically have access to CLAUDE.md, so repeating its contents (repo structure, key commands, architecture overview, etc.) is redundant. Focus only on session-specific context that isn't captured there.
 
 ## Output Format
 
@@ -65,7 +61,6 @@ $ARGUMENTS
 - Prioritize files by importance to the goal.
 - Preserve specific details: function names, API endpoints, config values, error messages.
 - The user's goal statement IS the instruction. Don't rephrase or expand it.
+- Omit anything the new thread will already know from CLAUDE.md.
 
----
-
-Once the sub-agent returns the handoff prompt, copy it to the clipboard using `pbcopy` on macOS (or `xclip`/`xsel` on Linux), then show the user the generated prompt and confirm it has been copied. Remind them they can edit it after pasting into the new thread.
+Once the handoff prompt is written, copy it to the clipboard using `pbcopy` on macOS (or `xclip`/`xsel` on Linux), then show the user the generated prompt and confirm it has been copied. Remind them they can edit it after pasting into the new thread.
