@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+claude -p 'Please implement the linear ticket associated with this branch. You should have enough context from the ticket to implement it, if you do not have enough context or run into something that requires a second opinion because it could be a large change. Please stop and ask for clarification'
+
+claude --continue
