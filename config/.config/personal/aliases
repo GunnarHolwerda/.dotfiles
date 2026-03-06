@@ -14,3 +14,6 @@ function cdg() {
     dir=$(find ~/code -maxdepth 3 -name ".git" -type d | sed 's|/.git$||' | sed "s|$HOME/code/||" | fzf) && cd ~/code/"$dir"
 }
 
+# Source local aliases (not checked into repo)
+[[ -f $PERSONAL/aliases.local ]] && source $PERSONAL/aliases.local
+
