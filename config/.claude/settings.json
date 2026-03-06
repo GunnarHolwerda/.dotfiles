@@ -116,8 +116,7 @@
       "Bash(git grep:*)"
     ],
     "deny": [],
-    "defaultMode": "acceptEdits",
-    "disableBypassPermissionsMode": "disable"
+    "defaultMode": "acceptEdits"
   },
   "hooks": {
     "Stop": [
@@ -143,5 +142,7 @@
   "alwaysThinkingEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754071598024
-  }
+  },
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true
 }

@@ -17,3 +17,8 @@ disabled = true
 
 [git_branch]
 style = 'yellow'
+
+[git_metrics]
+disabled = false
+added_style = "bold green"
+deleted_style = "bold red"
