@@ -14,10 +14,10 @@
     "frontend-design@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/gunnar/.claude/plugins/cache/claude-plugins-official/frontend-design/205b6e0b3036",
-        "version": "205b6e0b3036",
+        "installPath": "/Users/gunnar/.claude/plugins/cache/claude-plugins-official/frontend-design/bd041495bd2a",
+        "version": "bd041495bd2a",
         "installedAt": "2026-02-11T01:10:07.760Z",
-        "lastUpdated": "2026-03-04T02:21:13.987Z",
+        "lastUpdated": "2026-03-10T23:09:07.248Z",
         "gitCommitSha": "2cd88e7947b7382e045666abee790c7f55f669f3"
       }
     ]

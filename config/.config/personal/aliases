@@ -3,6 +3,7 @@
 alias zfg="zed ~/.zshrc"
 alias zprofile="time ZSH_DEBUGRC=1 zsh -i -c exit"
 alias dc="docker compose"
+alias tf="terraform"
 alias cat="bat"
 alias gfg="zed $XDG_CONFIG_HOME/ghostty/config"
 alias wtn="wt switch --create"
