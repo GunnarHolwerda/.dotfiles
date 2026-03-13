@@ -9,6 +9,7 @@ alias gfg="zed $XDG_CONFIG_HOME/ghostty/config"
 alias wtn="wt switch --create"
 alias wtc="wt switch --create --execute=claude"
 alias wtl="wt switch --create --execute=claude-linear"
+alias claude="claude --enable-auto-mode"
 alias cdsp="claude --dangerously-skip-permissions"
 
 function cdg() {
