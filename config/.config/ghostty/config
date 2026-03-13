@@ -1,6 +1,6 @@
 font-family = "0xProto"
 font-size = 12
-theme = ayu
+theme = 0x96f
 shell-integration = zsh
 shell-integration-features = no-cursor
 cursor-style = block
@@ -11,7 +11,7 @@ macos-icon = custom
 macos-custom-icon = ~/.config/ghostty/Ghostty.png
 
 background-blur = true
-background-opacity = 0.9
+background-opacity = 0.98
 split-divider-color = #B38F47
 unfocused-split-opacity = 0.67
 
