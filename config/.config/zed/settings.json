@@ -146,11 +146,7 @@
     "default_height": 320,
     "default_width": 640,
   },
-  "theme": {
-    "mode": "dark",
-    "light": "One Light",
-    "dark": "One Dark Pro",
-  },
+  "theme": "0x96f Theme",
   "autosave": "on_focus_change",
   "tabs": {
     "file_icons": true,
