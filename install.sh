@@ -97,10 +97,9 @@ function symlink_claude_config() {
     CLAUDE_DIR="$HOME/.claude"
     CLAUDE_SRC="$REPO_DIR/config/.claude"
 
-    # Ensure ~/.claude and ~/.claude/plugins exist
+    # Ensure ~/.claude exists
     if [[ $DRY_RUN == "0" ]]; then
         mkdir -p "$CLAUDE_DIR"
-        mkdir -p "$CLAUDE_DIR/plugins"
     fi
 
     # Symlink settings.json
@@ -133,17 +132,6 @@ function symlink_claude_config() {
         ln -s "$CLAUDE_SRC/agents" "$CLAUDE_DIR/agents"
     fi
 
-    # Symlink plugin config files (not the cache directories or marketplace data)
-    for f in config.json installed_plugins.json; do
-        log "    removing: rm -f $CLAUDE_DIR/plugins/$f"
-        if [[ $DRY_RUN == "0" ]]; then
-            rm -f "$CLAUDE_DIR/plugins/$f"
-        fi
-        log "    symlinking: ln -s $CLAUDE_SRC/plugins/$f $CLAUDE_DIR/plugins/$f"
-        if [[ $DRY_RUN == "0" ]]; then
-            ln -s "$CLAUDE_SRC/plugins/$f" "$CLAUDE_DIR/plugins/$f"
-        fi
-    done
 }
 
 function symlink_zed_config() {

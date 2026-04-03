@@ -26,6 +26,8 @@ source ~/.zsh_profile
 
 eval "$(mise activate zsh)"
 
+eval "$(wt config shell init zsh)"
+
 if [[ -n "$ZSH_DEBUGRC" ]]; then
   zprof
 fi

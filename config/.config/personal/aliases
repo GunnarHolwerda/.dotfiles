@@ -9,7 +9,7 @@ alias gfg="zed $XDG_CONFIG_HOME/ghostty/config"
 alias wtn="git fetch origin && wt switch --create"
 alias wtc="git fetch origin && wt switch --create --execute=claude"
 alias wtl="git fetch origin && wt switch --create --execute=claude-linear"
-alias claude="claude --enable-auto-mode"
+alias claude="CLAUDE_CODE_NO_FLICKER=1 claude"
 alias cdsp="claude --dangerously-skip-permissions"
 
 function cdg() {

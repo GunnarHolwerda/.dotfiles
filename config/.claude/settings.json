@@ -116,7 +116,7 @@
       "Bash(git grep:*)"
     ],
     "deny": [],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "auto"
   },
   "hooks": {
     "Stop": [
@@ -158,5 +158,6 @@
   "skipDangerousModePermissionPrompt": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754071598024
-  }
+  },
+  "skipAutoPermissionPrompt": true
 }

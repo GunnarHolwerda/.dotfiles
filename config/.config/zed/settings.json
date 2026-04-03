@@ -57,6 +57,8 @@
   "agent_servers": {
     "claude": {
       "default_mode": "acceptEdits",
+      "command": "claude",
+      "type": "custom",
     },
   },
   "edit_predictions": {
@@ -83,9 +85,6 @@
   },
   "icon_theme": "Catppuccin Frappé",
   "show_edit_predictions": true,
-  "features": {
-    "edit_prediction_provider": "zed",
-  },
   "vim_mode": true,
   "vim": {
     "toggle_relative_line_numbers": true,
@@ -102,7 +101,6 @@
       "provider": "zed.dev",
       "model": "claude-3-7-sonnet-latest",
     },
-    "always_allow_tool_actions": true,
     "profiles": {
       "write": {
         "name": "Write",
