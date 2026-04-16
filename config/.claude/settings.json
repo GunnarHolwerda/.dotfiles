@@ -124,7 +124,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay -v 15 /System/Library/Sounds/Ping.aiff &"
+            "command": "printf '\\a' > /dev/tty; afplay -v 15 /System/Library/Sounds/Ping.aiff &"
           }
         ]
       }
@@ -156,8 +156,8 @@
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754071598024
-  },
-  "skipAutoPermissionPrompt": true
+  }
 }
