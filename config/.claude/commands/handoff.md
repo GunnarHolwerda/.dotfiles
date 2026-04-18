@@ -63,4 +63,4 @@ $ARGUMENTS
 - The user's goal statement IS the instruction. Don't rephrase or expand it.
 - Omit anything the new thread will already know from CLAUDE.md.
 
-Once the handoff prompt is written, copy it to the clipboard using `pbcopy` on macOS (or `xclip`/`xsel` on Linux), then show the user the generated prompt and confirm it has been copied. Remind them they can edit it after pasting into the new thread.
+Once the handoff prompt is written, copy it to the clipboard using `pbcopy` on macOS (or `xclip`/`xsel` on Linux). Do not print the generated prompt in the response. After the copy succeeds, respond with exactly: `Ok. copied to clipboard`

@@ -1,6 +1,10 @@
 {
   "amp.notifications.enabled": true,
-  "amp.mcpServers": {},
+  "amp.mcpServers": {
+    "linear-server": {
+      "url": "https://mcp.linear.app/mcp"
+    }
+  },
   "amp.mcp.disable": [],
   "amp.tools.disable": [],
   "amp.commands.allowlist": [
