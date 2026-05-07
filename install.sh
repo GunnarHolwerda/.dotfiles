@@ -92,6 +92,71 @@ function copy() {
     fi
 }
 
+function symlink_personal_skills() {
+    # Treat repo-managed skill directories as aliases so any personal skill can be
+    # used by Claude Code, Amp/agents, and Codex regardless of which convention
+    # the skill was originally stored under.
+    local skill_sources=(
+        "$REPO_DIR/config/.claude/skills"
+        "$REPO_DIR/config/.agents/skills"
+        "$REPO_DIR/config/.codex/skills"
+    )
+    local skill_targets=(
+        "$HOME/.claude/skills"
+        "$HOME/.agents/skills"
+        "${CODEX_HOME:-$HOME/.codex}/skills"
+    )
+    local has_skills=0
+
+    for skills_src in "${skill_sources[@]}"; do
+        if [[ -d "$skills_src" ]]; then
+            has_skills=1
+            break
+        fi
+    done
+
+    if [[ $has_skills == "0" ]]; then
+        return
+    fi
+
+    for skills_dir in "${skill_targets[@]}"; do
+        log "    ensuring: mkdir -p $skills_dir"
+        if [[ $DRY_RUN == "0" ]]; then
+            mkdir -p "$skills_dir"
+        fi
+    done
+
+    for skills_src in "${skill_sources[@]}"; do
+        if [[ ! -d "$skills_src" ]]; then
+            continue
+        fi
+
+        for skill in "$skills_src"/*; do
+            if [[ ! -e "$skill" ]]; then
+                continue
+            fi
+
+            if [[ ! -d "$skill" ]]; then
+                log "    skipping: $skill (not a directory)"
+                continue
+            fi
+
+            skill_name="${skill##*/}"
+            for skills_dir in "${skill_targets[@]}"; do
+                log "    removing: rm -rf $skills_dir/$skill_name"
+                if [[ $DRY_RUN == "0" ]]; then
+                    rm -rf "$skills_dir/$skill_name"
+                fi
+
+                log "    symlinking: ln -s $skill $skills_dir/$skill_name"
+                if [[ $DRY_RUN == "0" ]]; then
+                    ln -s "$skill" "$skills_dir/$skill_name"
+                fi
+            done
+        done
+    done
+}
+
 function symlink_claude_config() {
     log "symlinking claude config"
     CLAUDE_DIR="$HOME/.claude"
@@ -131,6 +196,8 @@ function symlink_claude_config() {
     if [[ $DRY_RUN == "0" ]]; then
         ln -s "$CLAUDE_SRC/agents" "$CLAUDE_DIR/agents"
     fi
+
+    symlink_personal_skills
 
 }
 
