@@ -3,6 +3,17 @@
   "amp.mcpServers": {
     "linear-server": {
       "url": "https://mcp.linear.app/mcp"
+    },
+    "linear": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.linear.app/mcp"
+      ]
+    },
+    "sentry": {
+      "url": "https://mcp.sentry.dev/mcp"
     }
   },
   "amp.mcp.disable": [],

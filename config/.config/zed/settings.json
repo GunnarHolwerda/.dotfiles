@@ -7,9 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "disable_ai": false,
   "cli_default_open_behavior": "existing_window",
   "diff_view_style": "split",
   "collaboration_panel": {
+    "button": false,
     "dock": "right",
   },
   "git_panel": {
@@ -71,13 +73,13 @@
     },
   },
   "edit_predictions": {
+    "allow_data_collection": "no",
     "disabled_globs": [".env", ".env.*"],
     "mode": "eager",
     "copilot": {
       "proxy": null,
       "proxy_no_verify": null,
     },
-    "enabled_in_text_threads": true,
   },
   "status_bar": {
     "show_active_file": true,
@@ -85,6 +87,10 @@
   },
   "use_system_prompts": true, // Always use ZED UI prompts instead of MAC UI system prompts which arent as good
   "project_panel": {
+    "indent_guides": {
+      "show": "never",
+    },
+    "file_icons": true,
     "diagnostic_badges": true,
     "git_status_indicator": true,
     "bold_folder_labels": true,
@@ -108,6 +114,9 @@
   "buffer_font_size": 13,
   "buffer_font_family": "0xProto",
   "agent": {
+    "sidebar_side": "left",
+    "default_width": 640.0,
+    "flexible": true,
     "use_modifier_to_send": true,
     "play_sound_when_agent_done": "always",
     "inline_assistant_model": {
@@ -153,9 +162,7 @@
     },
     "enabled": true,
     "button": false,
-    "dock": "left",
-    "default_height": 320,
-    "default_width": 640,
+    "dock": "right",
   },
   "theme": "0x96f Theme",
   "autosave": "on_focus_change",

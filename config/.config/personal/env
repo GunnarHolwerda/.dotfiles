@@ -13,6 +13,7 @@ addToPathFront() {
 }
 
 addToPath "$HOME/.local/bin"
+addToPath "$HOME/.bun/bin"
 
 export PNPM_HOME="$HOME/.config/pnpm"
 addToPath $PNPM_HOME
