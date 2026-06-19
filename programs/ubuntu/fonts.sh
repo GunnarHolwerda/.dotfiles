@@ -18,5 +18,11 @@ wget -P $fonts_dir https://github.com/ryanoasis/nerd-fonts/releases/download/v3.
 unzip $fonts_dir/0xProto -d $fonts_dir
 rm -rf $fonts_dir/0xProto.zip
 
+lilex_version=2.700
+lilex_zip=/tmp/Lilex_v${lilex_version}.zip
+curl --fail --location --show-error https://github.com/mishamyrt/Lilex/releases/download/${lilex_version}/Lilex.zip --output ${lilex_zip}
+unzip -o -q -d ${fonts_dir} ${lilex_zip}
+rm ${lilex_zip}
+
 echo "fc-cache -f"
 fc-cache -f

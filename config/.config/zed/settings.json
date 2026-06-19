@@ -110,9 +110,9 @@
     "highlight_on_yank_duration": 150,
   },
   "ui_font_size": 13,
-  "ui_font_family": "0xProto",
+  "ui_font_family": "Lilex",
   "buffer_font_size": 13,
-  "buffer_font_family": "0xProto",
+  "buffer_font_family": "Lilex",
   "agent": {
     "sidebar_side": "left",
     "default_width": 640.0,
@@ -207,7 +207,7 @@
     // "**/node_modules"
   ],
   "terminal": {
-    "font_family": "0xProto",
+    "font_family": "Lilex",
     "font_size": 12,
   },
   "context_servers": {
