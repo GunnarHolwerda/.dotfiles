@@ -47,6 +47,7 @@ end
 
 M.setup = function ()
 	vim.keymap.set("n", "<leader>fg", live_multigrep)
+	vim.keymap.set("n", "<leader>/", live_multigrep)
 end
 
 return M

@@ -118,6 +118,7 @@
     "deny": [],
     "defaultMode": "auto"
   },
+  "model": "sonnet",
   "hooks": {
     "Stop": [
       {
@@ -145,7 +146,7 @@
     }
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
