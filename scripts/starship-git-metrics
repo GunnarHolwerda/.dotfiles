@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+#
+# Print git added/deleted line counts for the Starship prompt, counting
+# untracked files as additions. Starship's built-in git_metrics module can't
+# do this, so this stands in for it.
+#
+# Output is a single field, selected by the first argument:
+#   added    -> total added lines (tracked changes + untracked files), or empty
+#   deleted  -> total deleted lines, or empty
+# Empty output means "zero" so the matching Starship custom module hides itself.
+
+set -euo pipefail
+
+field=${1:-added}
+
+git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
+git_dir=$(git rev-parse --git-dir 2>/dev/null) || exit 0
+
+# Mark every change (including untracked files) as intent-to-add in a throwaway
+# copy of the index so untracked files show up in the diff without mutating the
+# real index.
+tmp_index=$(mktemp -u "${TMPDIR:-/tmp}/starship-git-index.XXXXXX")
+trap 'rm -f "$tmp_index"' EXIT
+[ -f "$git_dir/index" ] && cp "$git_dir/index" "$tmp_index"
+export GIT_INDEX_FILE="$tmp_index"
+git add -A -N . >/dev/null 2>&1 || true
+
+if git rev-parse --verify -q HEAD >/dev/null 2>&1; then
+  base=HEAD
+else
+  base=$(git hash-object -t tree /dev/null) # empty tree, for a repo with no commits
+fi
+
+added=0
+deleted=0
+while IFS=$'\t' read -r a d _; do
+  [ "$a" = "-" ] && continue # binary file: numstat reports '-'
+  added=$((added + a))
+  deleted=$((deleted + d))
+done < <(git diff "$base" --numstat 2>/dev/null)
+
+case "$field" in
+deleted) count=$deleted ;;
+*) count=$added ;;
+esac
+
+# Print nothing when zero; the Starship module wraps $output in a (...) group
+# that hides itself when the output is empty.
+[ "$count" -gt 0 ] && printf '%s' "$count"
+exit 0
