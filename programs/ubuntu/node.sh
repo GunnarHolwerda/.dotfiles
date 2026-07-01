@@ -5,6 +5,6 @@ curl https://mise.run | sh
 # Load MISE into current context
 eval "$(mise activate zsh)"
 
-mise install --global node@22.13.1
+mise install --global node@24
 
 corepack enable
