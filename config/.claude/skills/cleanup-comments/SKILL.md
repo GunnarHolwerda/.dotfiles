@@ -18,6 +18,7 @@ The user strongly prefers putting rationale in **commit messages** over comments
 - **Narration** — comments that restate what the next line already says. `// increment counter` above `counter++`. `// loop over users`. If the comment only confirms what well-named code already communicates, delete it.
 - **Redundant JSDoc/docstrings** — boilerplate `@param`/`@returns` that just restate the types and parameter names with no new information; a one-line summary that repeats the function name in prose.
 - **Changelog / history comments** — "added X", "removed Y", "used to be Z", dates, ticket numbers inline. This belongs in the commit message.
+- **Cross-reference / "used by" comments** — comments that describe where a function, value, or type is consumed elsewhere ("Used when a thread is archived…", "Called by the sync worker", "Referenced in the settings page"). These couple a definition to distant call sites the reader can't see, so they go stale the moment a caller changes and actively mislead both humans and agents. Callers are discoverable with a reference search; don't narrate them here. Keep only the local *why* the code takes the shape it does, not who calls it.
 - **Commented-out code** — dead code that version control already preserves.
 - **Section-divider decoration** and other visual noise that renaming or splitting a function would obviate.
 - **Obvious explanations** of standard idioms any competent reader knows.
