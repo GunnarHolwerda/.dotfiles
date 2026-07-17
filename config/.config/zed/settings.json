@@ -83,7 +83,7 @@
     "indent_size": 10.0,
     "entry_spacing": "standard",
     "default_width": 200.0,
-    "dock": "right",
+    "dock": "left",
   },
   "icon_theme": "Catppuccin Frappé",
   "show_edit_predictions": true,

@@ -12,6 +12,12 @@ alias wtl="git fetch origin && wt switch --create --execute=claude-linear"
 alias wtr="wt remove"
 alias claude="CLAUDE_CODE_NO_FLICKER=1 claude"
 alias cdsp="claude --dangerously-skip-permissions"
+alias claudex='CLAUDE_CODE_SUBAGENT_MODEL=gpt-5.6-sol \
+CLAUDE_CODE_ALWAYS_ENABLE_EFFORT=1 \
+CLAUDE_CODE_MAX_TOOL_USE_CONCURRENCY=3 \
+ENABLE_TOOL_SEARCH=false \
+ANTHROPIC_BASE_URL=http://localhost:8317 \
+claude --model gpt-5.6-sol'
 
 function cdg() {
     local dir

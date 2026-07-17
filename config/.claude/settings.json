@@ -113,12 +113,12 @@
       "mcp__acp__Bash",
       "Bash(gh run view:*)",
       "WebFetch(domain:worktrunk.dev)",
-      "Bash(git grep:*)"
+      "Bash(git grep:*)",
+      "Bash(codex exec:*)"
     ],
     "deny": [],
     "defaultMode": "auto"
   },
-  "model": "sonnet",
   "hooks": {
     "Stop": [
       {
@@ -154,6 +154,7 @@
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "editorMode": "vim",
+  "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
   "feedbackSurveyState": {

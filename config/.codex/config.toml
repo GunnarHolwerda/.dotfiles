@@ -1,0 +1,261 @@
+sandbox_mode = "workspace-write"
+model = "gpt-5.6-sol"
+model_reasoning_effort = "medium"
+notify = [ "/Users/gunnar/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended" ]
+service_tier = "default"
+approvals_reviewer = "auto_review"
+personality = "none"
+
+[projects."/Users/gunnar/code/em1"]
+trust_level = "trusted"
+
+[projects."/Users/gunnar/code/opencode"]
+trust_level = "trusted"
+
+[projects."/Users/gunnar/code/.dotfiles"]
+trust_level = "trusted"
+
+[projects."/Users/gunnar/Documents/Codex/2026-04-18-can-you-open-imessages-and-look"]
+trust_level = "trusted"
+
+[projects."/Users/gunnar/Documents/Ad Hoc"]
+trust_level = "trusted"
+
+[projects."/Users/gunnar/conductor/repos/Starter project"]
+trust_level = "trusted"
+
+[projects."/Users/gunnar/code/TheWarnBench"]
+trust_level = "trusted"
+
+[projects."/Users/gunnar/code/test-interview"]
+trust_level = "trusted"
+
+[projects."/Users/gunnar/code/test-code-review"]
+trust_level = "trusted"
+
+[plugins."google-calendar@openai-curated"]
+enabled = true
+
+[plugins."sentry@openai-curated"]
+enabled = true
+
+[plugins."sites@openai-bundled"]
+enabled = true
+
+[plugins."anthropic-skills@claude-cowork"]
+enabled = true
+
+[plugins."apollo@claude-cowork"]
+enabled = true
+
+[plugins."bio-research@claude-cowork"]
+enabled = true
+
+[plugins."brand-voice@claude-cowork"]
+enabled = true
+
+[plugins."common-room@claude-cowork"]
+enabled = true
+
+[plugins."cowork-plugin-management@claude-cowork"]
+enabled = true
+
+[plugins."customer-support@claude-cowork"]
+enabled = true
+
+[plugins."data@claude-cowork"]
+enabled = true
+
+[plugins."design@claude-cowork"]
+enabled = true
+
+[plugins."engineering@claude-cowork"]
+enabled = true
+
+[plugins."enterprise-search@claude-cowork"]
+enabled = true
+
+[plugins."finance@claude-cowork"]
+enabled = true
+
+[plugins."human-resources@claude-cowork"]
+enabled = true
+
+[plugins."legal@claude-cowork"]
+enabled = true
+
+[plugins."marketing@claude-cowork"]
+enabled = true
+
+[plugins."operations@claude-cowork"]
+enabled = true
+
+[plugins."product-management@claude-cowork"]
+enabled = true
+
+[plugins."productivity@claude-cowork"]
+enabled = true
+
+[plugins."sales@claude-cowork"]
+enabled = true
+
+[plugins."slack-by-salesforce@claude-cowork"]
+enabled = true
+
+[plugins."em1-product-announcements@claude-cowork"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
+[plugins."visualize@openai-bundled"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[marketplaces.openai-bundled]
+last_updated = "2026-07-13T20:36:16Z"
+source_type = "local"
+source = "/Users/gunnar/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+last_updated = "2026-07-16T08:32:06Z"
+source_type = "local"
+source = "/Users/gunnar/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+"gpt-5.6-sol" = 4
+
+[notice]
+fast_default_opt_out = true
+
+[notice.model_migrations]
+"gpt-5.4" = "gpt-5.5"
+
+[mcp_servers.linear]
+url = "https://mcp.linear.app/mcp"
+
+[mcp_servers.linear.tools.save_issue]
+approval_mode = "approve"
+
+[mcp_servers.node_repl]
+args = []
+command = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node_repl"
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
+NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/gunnar/.codex"
+CODEX_HOME = "/Users/gunnar/.codex"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f,e2cad16d8d9f60f09c9f0951ec7dfdd9e8f59dedd06045c0b6827dc8fa8322f0"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
+NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = "Control desktop apps on macOS through Computer Use."
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.707.62119"
+CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
+
+[mcp_servers.chrome-devtools]
+command = "bunx"
+args = [ "-y", "chrome-devtools-mcp@latest", "--headless", "--isolated" ]
+
+[mcp_servers.chrome-devtools.tools.take_snapshot]
+approval_mode = "approve"
+
+[mcp_servers.chrome-devtools.tools.take_screenshot]
+approval_mode = "approve"
+
+[mcp_servers.chrome-devtools.tools.resize_page]
+approval_mode = "approve"
+
+[mcp_servers.computer-use]
+command = "./Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient"
+args = ["mcp"]
+cwd = "."
+enabled = false
+
+[desktop]
+appearanceTheme = "system"
+appearanceLightCodeThemeId = "linear"
+composerEnterBehavior = "cmdIfMultiline"
+git-pull-request-merge-method = "squash"
+git-show-sidebar-pr-icons = true
+git-commit-instructions = "Use semantic commit format when committing."
+conversationDetailMode = "STEPS_COMMANDS"
+show-context-window-usage = true
+followUpQueueMode = "queue"
+selected-avatar-id = "null-signal"
+appearanceDarkCodeThemeId = "linear"
+dock-icon-preference = "codex-system"
+
+[desktop.appearanceLightChromeTheme]
+accent = "#5e6ad2"
+contrast = 45
+ink = "#1b1b1b"
+opaqueWindows = true
+surface = "#fcfcfd"
+
+[desktop.appearanceLightChromeTheme.fonts]
+code = "Lilex"
+ui = "Inter"
+
+[desktop.appearanceLightChromeTheme.semanticColors]
+diffAdded = "#52a450"
+diffRemoved = "#c94446"
+skill = "#8160d8"
+
+[desktop.open-in-target-preferences]
+global = "zed"
+
+[desktop.appearanceDarkChromeTheme]
+accent = "#606acc"
+contrast = 60
+ink = "#e3e4e6"
+opaqueWindows = true
+surface = "#0f0f11"
+
+[desktop.appearanceDarkChromeTheme.fonts]
+code = "Lilex"
+ui = "Inter"
+
+[desktop.appearanceDarkChromeTheme.semanticColors]
+diffAdded = "#69c967"
+diffRemoved = "#ff7e78"
+skill = "#c2a1ff"
+
+[features]
+js_repl = false
+
+[hooks.state]
+
+[hooks.state."/Users/gunnar/.codex/hooks.json:stop:0:0"]
+trusted_hash = "sha256:ecba330b65b4a84fd31fdef63adfaf9c0795790d75d4f74997b2efae54574053"
+enabled = true
+
+[hooks.state."/Users/gunnar/code/em1/.codex/hooks.json:session_start:1:0"]
+trusted_hash = "sha256:b11dbdd59f42ee304dd6aa870c5465749dc8fcdfb0609dc8f26ff1595d31dedd"
+enabled = true
+
+[hooks.state."/Users/gunnar/code/em1/.codex/hooks.json:session_start:0:1"]
+trusted_hash = "sha256:429f8aeeba331aa2722e7c85514085266d942305c12d76e34250f5f3b23ef71a"
+
+[hooks.state."/Users/gunnar/code/em1/.codex/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:ac2b7f794649e35a53238319b66e79b91ebd099fdcd96bf49bcdd28f054222cc"
+enabled = true

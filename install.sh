@@ -201,6 +201,28 @@ function symlink_claude_config() {
 
 }
 
+function symlink_codex_config() {
+    local codex_dir="${CODEX_HOME:-$HOME/.codex}"
+    local codex_src="$REPO_DIR/config/.codex"
+
+    log "symlinking codex config"
+
+    if [[ $DRY_RUN == "0" ]]; then
+        mkdir -p "$codex_dir/rules"
+    fi
+
+    for relative_path in config.toml rules/default.rules; do
+        log "    removing: rm -f $codex_dir/$relative_path"
+        if [[ $DRY_RUN == "0" ]]; then
+            rm -f "$codex_dir/$relative_path"
+        fi
+        log "    symlinking: ln -s $codex_src/$relative_path $codex_dir/$relative_path"
+        if [[ $DRY_RUN == "0" ]]; then
+            ln -s "$codex_src/$relative_path" "$codex_dir/$relative_path"
+        fi
+    done
+}
+
 function symlink_zed_config() {
     log "symlinking zed config"
     ZED_DIR="$XDG_CONFIG_HOME/zed"
@@ -245,6 +267,7 @@ update_files "$REPO_DIR/config/.config" $XDG_CONFIG_HOME "zed"
 copy "$REPO_DIR/config/.zshrc" "$HOME/.zshrc"
 copy "$REPO_DIR/config/.zsh_profile" "$HOME/.zsh_profile"
 symlink_claude_config
+symlink_codex_config
 symlink_zed_config
 
 if [ $IS_MAC -eq 0 ]; then

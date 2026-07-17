@@ -1,3 +1,4 @@
 .DS_Store
 config/.config/personal/aliases.local
 config/.claude/plugins/
+config/.codex/tmp/
