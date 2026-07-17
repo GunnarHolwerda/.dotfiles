@@ -136,6 +136,9 @@
     "command": "bunx -y ccstatusline@latest",
     "padding": 0
   },
+  "skillOverrides": {
+    "vercel-react-best-practices": "user-invocable-only"
+  },
   "enabledPlugins": {},
   "extraKnownMarketplaces": {
     "claude-plugins-official": {

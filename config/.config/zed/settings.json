@@ -17,23 +17,6 @@
   "git_panel": {
     "dock": "right",
   },
-  "lsp": {
-    "vtsls": {
-      "settings": {
-        "typescript": {
-          "updateImportsOnFileMove": {
-            "enabled": "always",
-          },
-        },
-        "javascript": {
-          "updateImportsOnFileMove": {
-            "enabled": "always",
-          },
-        },
-      },
-      "enable_lsp_tasks": true,
-    },
-  },
   "colorize_brackets": true,
   "ssh_connections": [
     {
@@ -176,6 +159,12 @@
   "languages": {
     "TypeScript": {
       "formatter": ["prettier"],
+      "language_servers": [
+        "typescript-ls",
+        "!vtsls",
+        "!typescript-language-server",
+        "...",
+      ],
       "code_actions_on_format": {
         "source.organizeImports": true,
         "source.fixAll.eslint": true,
@@ -183,6 +172,12 @@
     },
     "TSX": {
       "formatter": ["prettier"],
+      "language_servers": [
+        "typescript-ls",
+        "!vtsls",
+        "!typescript-language-server",
+        "...",
+      ],
       "code_actions_on_format": {
         "source.organizeImports": true,
         "source.fixAll.eslint": true,
