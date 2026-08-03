@@ -1,0 +1,4 @@
+interface:
+  display_name: "Linear Ticket Writing"
+  short_description: "Draft product-first, verifiable Linear tickets"
+  default_prompt: "Use $linear-ticket-writing to draft or improve this Linear ticket."

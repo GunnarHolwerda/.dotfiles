@@ -9,7 +9,7 @@ bell-features = title,border
 macos-icon = custom
 macos-custom-icon = ~/.config/ghostty/Ghostty.png
 
-background-blur = true
+background-blur = false
 background-opacity = 0.98
 split-divider-color = #B38F47
 unfocused-split-opacity = 0.67
