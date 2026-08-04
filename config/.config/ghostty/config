@@ -8,6 +8,8 @@ bell-features = title,border
 
 macos-icon = custom
 macos-custom-icon = ~/.config/ghostty/Ghostty.png
+macos-auto-secure-input = true
+macos-secure-input-indication = true
 
 background-blur = false
 background-opacity = 0.98

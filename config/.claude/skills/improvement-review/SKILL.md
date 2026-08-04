@@ -1,11 +1,11 @@
 ---
 name: improvement-review
-description: Run a two-reviewer adversarial improvement review — one Opus 4.8 (xhigh) subagent and one Codex (gpt-5.6-sol, xhigh) via the codex CLI — over the current branch changes, a plan, an outstanding diff, or a claimed bug finding, then reconcile and act on the findings. Call with no args to review all changes on the current branch, or with a short description of what to review. Also invoke this proactively after completing a large chunk of work to validate correctness, simplicity, and accuracy before considering it done.
+description: Run a two-reviewer adversarial improvement review — one latest-Opus (xhigh) subagent and one Codex (gpt-5.6-sol, xhigh) via the codex CLI — over the current branch changes, a plan, an outstanding diff, or a claimed bug finding, then reconcile and act on the findings. Call with no args to review all changes on the current branch, or with a short description of what to review. Also invoke this proactively after completing a large chunk of work to validate correctness, simplicity, and accuracy before considering it done.
 ---
 
 # Improvement Review
 
-Get two independent, adversarial reviews of some work — from a Claude (Opus 4.8, xhigh) reviewer and a Codex (gpt-5.6-sol, xhigh) reviewer running as separate processes — then reconcile their findings and either fix them or bring a clear recommendation to the user.
+Get two independent, adversarial reviews of some work — from a Claude (latest Opus, xhigh) reviewer and a Codex (gpt-5.6-sol, xhigh) reviewer running as separate processes — then reconcile their findings and either fix them or bring a clear recommendation to the user.
 
 Use this to pressure-test a solution: find bugs, unhandled cases, over-engineering, security holes, and — importantly — architectural/refactoring problems that are better fixed *before* building further. It is equally valid for the user to invoke this manually or for you to invoke it yourself when you want confidence that a big change is correct, simple, and complete.
 
@@ -52,7 +52,7 @@ Write the brief to a scratchpad file so it can be passed to the codex CLI cleanl
 
 Launch both in a **single message** so they run concurrently.
 
-**Reviewer A — Claude (Opus 4.8, xhigh):** use the `Agent` tool with `model: "opus"` and `subagent_type: "general-purpose"`. Pass the full brief and the review mandate. Instruct it to read the relevant code itself for context and return its findings in the format above. (This session runs at high reasoning effort so the subagent reviews deeply; if you can set effort explicitly, use xhigh.)
+**Reviewer A — Claude (latest Opus, xhigh):** use the `Agent` tool with `model: "opus"` and `subagent_type: "general-purpose"`. `model: "opus"` always resolves to the latest Opus — do not pin a specific version. Pass the full brief and the review mandate. Instruct it to read the relevant code itself for context and return its findings in the format above. (This session runs at high reasoning effort so the subagent reviews deeply; if you can set effort explicitly, use xhigh.)
 
 **Reviewer B — Codex (gpt-5.6-sol, xhigh):** shell out to the codex CLI via `Bash`. Write the brief to a file first, then run (adjust the message file path to the scratchpad):
 

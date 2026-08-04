@@ -33,6 +33,9 @@ trust_level = "trusted"
 [projects."/Users/gunnar/code/test-code-review"]
 trust_level = "trusted"
 
+[projects."/Users/gunnar/code/em1-documentation"]
+trust_level = "trusted"
+
 [plugins."google-calendar@openai-curated"]
 enabled = true
 
@@ -136,6 +139,9 @@ last_updated = "2026-07-16T08:32:06Z"
 source_type = "local"
 source = "/Users/gunnar/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
+[tui]
+theme = "one-half-dark"
+
 [tui.model_availability_nux]
 "gpt-5.5" = 4
 "gpt-5.6-sol" = 4
@@ -190,6 +196,12 @@ command = "./Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.
 args = ["mcp"]
 cwd = "."
 enabled = false
+
+[mcp_servers.sentry]
+url = "https://mcp.sentry.dev/mcp"
+
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"
 
 [desktop]
 appearanceTheme = "system"

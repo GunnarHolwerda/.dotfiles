@@ -119,6 +119,9 @@
     "deny": [],
     "defaultMode": "auto"
   },
+  "skillOverrides": {
+    "vercel-react-best-practices": "user-invocable-only"
+  },
   "hooks": {
     "Stop": [
       {
@@ -136,9 +139,6 @@
     "command": "bunx -y ccstatusline@latest",
     "padding": 0
   },
-  "skillOverrides": {
-    "vercel-react-best-practices": "user-invocable-only"
-  },
   "enabledPlugins": {},
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -149,7 +149,7 @@
     }
   },
   "alwaysThinkingEnabled": true,
-  "effortLevel": "xhigh",
+  "effortLevel": "medium",
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
