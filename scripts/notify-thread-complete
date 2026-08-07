@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+sound_file="${XDG_CONFIG_HOME:-$HOME/.config}/sounds/thread-complete.aiff"
+payload="$(cat)"
+
+if [[ -n "$payload" ]]; then
+    if ! grep -Eq '"hook_event_name"[[:space:]]*:[[:space:]]*"Stop"' <<<"$payload"; then
+        exit 0
+    fi
+
+    if grep -Eq '"agent_id"[[:space:]]*:' <<<"$payload"; then
+        exit 0
+    fi
+
+    transcript_path="$(sed -nE 's/.*"transcript_path"[[:space:]]*:[[:space:]]*"([^"]*)".*/\1/p' <<<"$payload")"
+
+    if [[ "$transcript_path" == *"/subagents/"* ]]; then
+        exit 0
+    fi
+
+    if [[ -f "$transcript_path" ]] && head -n 1 "$transcript_path" | grep -Eq '"parent_thread_id"[[:space:]]*:|"thread_source"[[:space:]]*:[[:space:]]*"subagent"'; then
+        exit 0
+    fi
+fi
+
+if [[ "${TERM_PROGRAM:-}" == "ghostty" || "${TERM:-}" == "xterm-ghostty" ]]; then
+    printf '\a' > /dev/tty 2>/dev/null || true
+fi
+
+if [[ -f "$sound_file" ]] && command -v afplay >/dev/null 2>&1; then
+    afplay -v 1 "$sound_file" >/dev/null 2>&1 &
+fi

@@ -211,7 +211,7 @@ function symlink_codex_config() {
         mkdir -p "$codex_dir/rules"
     fi
 
-    for relative_path in config.toml rules/default.rules; do
+    for relative_path in config.toml rules/default.rules hooks.json; do
         log "    removing: rm -f $codex_dir/$relative_path"
         if [[ $DRY_RUN == "0" ]]; then
             rm -f "$codex_dir/$relative_path"

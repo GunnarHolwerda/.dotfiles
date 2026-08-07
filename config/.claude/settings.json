@@ -128,7 +128,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "printf '\\a' > /dev/tty; afplay -v 15 /System/Library/Sounds/Ping.aiff &"
+            "command": "$HOME/.local/bin/notify-thread-complete"
           }
         ]
       }
