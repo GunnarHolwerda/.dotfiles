@@ -167,6 +167,29 @@ function symlink_claude_config() {
         mkdir -p "$CLAUDE_DIR"
     fi
 
+    # Symlink CLAUDE.md (global instructions; the AGENTS.md links below point here)
+    log "    removing: rm -f $CLAUDE_DIR/CLAUDE.md"
+    if [[ $DRY_RUN == "0" ]]; then
+        rm -f "$CLAUDE_DIR/CLAUDE.md"
+    fi
+    log "    symlinking: ln -s $CLAUDE_SRC/CLAUDE.md $CLAUDE_DIR/CLAUDE.md"
+    if [[ $DRY_RUN == "0" ]]; then
+        ln -s "$CLAUDE_SRC/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
+    fi
+
+    # Codex reads AGENTS.md, so point both of its global locations at the same file
+    for agents_link in "$HOME/AGENTS.md" "${CODEX_HOME:-$HOME/.codex}/AGENTS.md"; do
+        log "    removing: rm -f $agents_link"
+        if [[ $DRY_RUN == "0" ]]; then
+            mkdir -p "$(dirname "$agents_link")"
+            rm -f "$agents_link"
+        fi
+        log "    symlinking: ln -s $CLAUDE_SRC/CLAUDE.md $agents_link"
+        if [[ $DRY_RUN == "0" ]]; then
+            ln -s "$CLAUDE_SRC/CLAUDE.md" "$agents_link"
+        fi
+    done
+
     # Symlink settings.json
     log "    removing: rm -f $CLAUDE_DIR/settings.json"
     if [[ $DRY_RUN == "0" ]]; then
