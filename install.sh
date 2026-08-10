@@ -235,6 +235,13 @@ function symlink_codex_config() {
     fi
 
     for relative_path in config.toml rules/default.rules hooks.json; do
+        # config.toml is gitignored (Codex rewrites it constantly), so a fresh
+        # clone has no source to link. Linking anyway leaves a broken symlink.
+        if [[ ! -e "$codex_src/$relative_path" ]]; then
+            log "    skipping: $codex_src/$relative_path does not exist"
+            continue
+        fi
+
         log "    removing: rm -f $codex_dir/$relative_path"
         if [[ $DRY_RUN == "0" ]]; then
             rm -f "$codex_dir/$relative_path"

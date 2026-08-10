@@ -2,3 +2,4 @@
 config/.config/personal/aliases.local
 config/.claude/plugins/
 config/.codex/tmp/
+config/.codex/config.toml
