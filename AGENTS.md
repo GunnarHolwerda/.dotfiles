@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
+This file provides guidance to Codex when working with code in this repository.
 
 ## Repository Overview
 
@@ -45,7 +45,7 @@ REPO_DIR=$HOME/code/.dotfiles ./install.sh --mac
 - The installer uses `REPO_DIR` environment variable (defaults to `$HOME/code/.dotfiles` on Mac, `$HOME/.dotfiles` on Ubuntu)
 - Configuration files are copied with removal of existing files first
 - Programs are installed by executing all scripts found in the platform-specific programs directory
-- The `scripts/npx-for-Codex` utility loads NVM environment for Codex MCP usage
+- The `scripts/npx-for-claude` utility loads NVM environment for MCP usage
 - Shell setup requires running `source ~/.zshrc` after installation
 
 ## Configuration Management
