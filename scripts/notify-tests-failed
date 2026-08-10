@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+sound_file="${XDG_CONFIG_HOME:-$HOME/.config}/sounds/tests-failed.aiff"
+
+if [[ -f "$sound_file" ]] && command -v afplay >/dev/null 2>&1; then
+    afplay -v 1 "$sound_file" >/dev/null 2>&1
+fi
