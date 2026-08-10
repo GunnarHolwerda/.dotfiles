@@ -4,14 +4,15 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
-# The git_added/git_deleted custom modules shell out to git; give them headroom
-# over the 500ms default so they don't time out on large repos or cold caches.
-command_timeout = 1000
+# custom.git_lines shells out to git; give it headroom over the 500ms default
+# so it doesn't time out on the first prompt after a boot, when neither bash nor
+# git is in the page cache yet.
+command_timeout = 2500
 
-# Default $all layout, but with $git_metrics swapped for the custom
-# git_added/git_deleted modules in the same slot (they count untracked files,
-# which git_metrics can't). $custom is dropped so they don't render twice.
-format = '$username$hostname$localip$shlvl$singularity$kubernetes$nats$directory$vcsh$fossil_branch$fossil_metrics$git_branch$git_commit$git_state${custom.git_added}${custom.git_deleted}$git_status$hg_branch$hg_state$pijul_channel$docker_context$package$bun$c$cmake$cobol$cpp$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$fortran$gleam$golang$gradle$haskell$haxe$helm$java$julia$kotlin$lua$maven$mojo$nim$nodejs$ocaml$odin$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust$scala$solidity$swift$terraform$typst$vlang$vagrant$xmake$zig$buf$guix_shell$nix_shell$conda$pixi$meson$spack$memory_usage$aws$gcloud$openstack$azure$direnv$env_var$mise$crystal$sudo$cmd_duration$line_break$jobs$battery$time$status$container$netns$os$shell$character'
+# Default $all layout, but with the built-in $git_metrics swapped for
+# ${custom.git_lines} in the same slot (it counts untracked files, which the
+# built-in can't). $custom is dropped so it doesn't render twice.
+format = '$username$hostname$localip$shlvl$singularity$kubernetes$nats$directory$vcsh$fossil_branch$fossil_metrics$git_branch$git_commit$git_state${custom.git_lines}$git_status$hg_branch$hg_state$pijul_channel$docker_context$package$bun$c$cmake$cobol$cpp$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$fortran$gleam$golang$gradle$haskell$haxe$helm$java$julia$kotlin$lua$maven$mojo$nim$nodejs$ocaml$odin$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust$scala$solidity$swift$terraform$typst$vlang$vagrant$xmake$zig$buf$guix_shell$nix_shell$conda$pixi$meson$spack$memory_usage$aws$gcloud$openstack$azure$direnv$env_var$mise$crystal$sudo$cmd_duration$line_break$jobs$battery$time$status$container$netns$os$shell$character'
 
 # Replace the '❯' symbol in the prompt with '➜'
 [character] # The name of the module we are configuring is 'character'
@@ -27,20 +28,24 @@ disabled = true
 [git_branch]
 style = 'yellow'
 
-# Replaced by the custom modules below, which count untracked files as additions.
+# Replaced by the custom module below, which counts untracked files as additions.
 [git_metrics]
 disabled = true
 
-[custom.git_added]
-description = "Added lines, including untracked files"
-command = 'starship-git-metrics added'
-when = 'git rev-parse --is-inside-work-tree 2>/dev/null'
-format = '([+$output](bold green) )'
-shell = ['bash', '--noprofile', '--norc']
-
-[custom.git_deleted]
-description = "Deleted lines"
-command = 'starship-git-metrics deleted'
-when = 'git rev-parse --is-inside-work-tree 2>/dev/null'
-format = '([-$output](bold red) )'
+# Not named 'git_metrics': a custom module inherits the same-named built-in's
+# `disabled` flag, so it would silently never render.
+#
+# The script colors its own output (green additions, red deletions) because a
+# custom module exposes a single $output variable and so can't style the two
+# counts differently. Starship rewrites those escapes into %{...%} for zsh, so
+# prompt width stays correct.
+#
+# require_repo gates the module, but starship won't run a custom module at all
+# unless a `when`/detect_* trigger is present -- hence the no-op `when`.
+[custom.git_lines]
+description = "Added/deleted lines, counting untracked files as additions"
+command = 'starship-git-metrics'
+require_repo = true
+when = 'true'
+format = '($output )'
 shell = ['bash', '--noprofile', '--norc']

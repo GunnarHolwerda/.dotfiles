@@ -4,14 +4,16 @@
 # untracked files as additions. Starship's built-in git_metrics module can't
 # do this, so this stands in for it.
 #
-# Output is a single field, selected by the first argument:
-#   added    -> total added lines (tracked changes + untracked files), or empty
-#   deleted  -> total deleted lines, or empty
-# Empty output means "zero" so the matching Starship custom module hides itself.
+# Emits both counts pre-colored (e.g. "+864 -12") rather than exposing them as
+# separate Starship modules: each module would spawn its own shell, `when`
+# probe, and full git diff, and that quadrupled process count is what made the
+# prompt time out on a cold cache. Nothing is printed when both counts are zero.
 
 set -euo pipefail
 
-field=${1:-added}
+GREEN=$'\033[1;32m'
+RED=$'\033[1;31m'
+RESET=$'\033[0m'
 
 git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 git_dir=$(git rev-parse --git-dir 2>/dev/null) || exit 0
@@ -39,12 +41,9 @@ while IFS=$'\t' read -r a d _; do
   deleted=$((deleted + d))
 done < <(git diff "$base" --numstat 2>/dev/null)
 
-case "$field" in
-deleted) count=$deleted ;;
-*) count=$added ;;
-esac
+out=""
+[ "$added" -gt 0 ] && out="${GREEN}+${added}${RESET}"
+[ "$deleted" -gt 0 ] && out="${out:+$out }${RED}-${deleted}${RESET}"
 
-# Print nothing when zero; the Starship module wraps $output in a (...) group
-# that hides itself when the output is empty.
-[ "$count" -gt 0 ] && printf '%s' "$count"
+printf '%s' "$out"
 exit 0
