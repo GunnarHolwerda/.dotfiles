@@ -45,6 +45,7 @@ Then read `$SCRATCH/codex-out.md` for Codex's final answer. (`$SCRATCH` = your s
 
 ## Running it well
 
+- **Never pipe the run through `tail`, `head`, `tee`, or any other filter.** `tail` buffers, so the stream stops arriving and you lose every completion signal — you cannot tell whether Codex is still thinking or already finished, and you end up waiting on a run that is long over. Let `codex exec` write to the terminal untouched and take the answer from the `-o` file. If the console output is too noisy, fix that with `-o` (and `--json` when you must parse it), never with a pipe.
 - **Background long runs.** At `xhigh` a run can take minutes. Launch it with `Bash` `run_in_background: true` and collect the `-o` file when it completes, so other work (or a parallel Claude subagent) overlaps with it.
 - **Handle absence/errors.** If the `codex` binary is missing or the command errors, report that and fall back rather than silently hanging. Check exit code; a nonzero exit with an empty `-o` file means the run failed (common causes: untrusted dir → add `--skip-git-repo-check`; blocked on stdin → add `< /dev/null`).
 - **Don't let it write unless you mean it.** Default to `-s read-only`. Only use `workspace-write` when the task is explicitly to make edits, and review the diff afterward.
