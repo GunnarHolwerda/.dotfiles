@@ -51,6 +51,10 @@ Pick a writable scratch directory first and set `$SCRATCH` to it — the command
 > - **Consistency** — divergence from existing patterns, conventions, and idioms in this codebase.
 >
 > For each finding give: a short title, severity (critical / high / medium / low), the file:line or component, why it's a problem, and a concrete recommended fix. Prefer few high-signal findings over a long low-value list. If you believe the work is sound, say so plainly.
+>
+> You are one reviewer inside an improvement review that is already running. Do not load or invoke the improvement-review skill, and do not delegate to or launch another reviewer. Review the brief yourself and return findings.
+
+That last paragraph is not optional. A review brief reads exactly like a request to start a review, so without it a reviewer can load this skill and launch reviewers of its own — burning cost and potentially stalling on itself.
 
 ## 4. Run the two reviewers in parallel
 

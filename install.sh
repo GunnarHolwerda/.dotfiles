@@ -108,9 +108,16 @@ function symlink_personal_skills() {
     )
     # An agent should not carry a skill describing how to invoke itself; it
     # invites recursive self-delegation. Entries are "<skill name>:<target dir>".
+    #
+    # Codex scans ~/.agents/skills as well as its own skills dir, so excluding a
+    # self-skill from one root alone does not hide it. Both self-skills are kept
+    # out of the shared root, which leaves each one reachable only from the other
+    # agent's private directory.
     local skill_target_excludes=(
         "codex:${CODEX_HOME:-$HOME/.codex}/skills"
+        "codex:$HOME/.agents/skills"
         "claude-code:$HOME/.claude/skills"
+        "claude-code:$HOME/.agents/skills"
     )
     local has_skills=0
 
@@ -259,6 +266,16 @@ function symlink_codex_config() {
         # clone has no source to link. Linking anyway leaves a broken symlink.
         if [[ ! -e "$codex_src/$relative_path" ]]; then
             log "    skipping: $codex_src/$relative_path does not exist"
+
+            # A machine installed before the file was ignored still points here.
+            # Drop that link so Codex writes a real file, but never touch a
+            # regular file: -L with a failing -e matches only a dangling link.
+            if [[ -L "$codex_dir/$relative_path" && ! -e "$codex_dir/$relative_path" ]]; then
+                log "    removing dangling link: rm -f $codex_dir/$relative_path"
+                if [[ $DRY_RUN == "0" ]]; then
+                    rm -f "$codex_dir/$relative_path"
+                fi
+            fi
             continue
         fi
 
