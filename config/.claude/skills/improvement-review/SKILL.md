@@ -1,11 +1,13 @@
 ---
 name: improvement-review
-description: Run a two-reviewer adversarial improvement review — one latest-Opus (xhigh) subagent and one Codex (gpt-5.6-sol, xhigh) via the codex CLI — over the current branch changes, a plan, an outstanding diff, or a claimed bug finding, then reconcile and act on the findings. Call with no args to review all changes on the current branch, or with a short description of what to review. Also invoke this proactively after completing a large chunk of work to validate correctness, simplicity, and accuracy before considering it done.
+description: Run a two-reviewer adversarial improvement review — one Claude (latest Opus, xhigh) reviewer and one Codex (gpt-5.6-sol, xhigh) reviewer — over the current branch changes, a plan, an outstanding diff, or a claimed bug finding, then reconcile and act on the findings. Works from either Claude Code or Codex; each runs one reviewer locally and delegates the other across. Call with no args to review all changes on the current branch, or with a short description of what to review. Also invoke this proactively after completing a large chunk of work to validate correctness, simplicity, and accuracy before considering it done.
 ---
 
 # Improvement Review
 
-Get two independent, adversarial reviews of some work — from a Claude (latest Opus, xhigh) reviewer and a Codex (gpt-5.6-sol, xhigh) reviewer running as separate processes — then reconcile their findings and either fix them or bring a clear recommendation to the user.
+Get two independent, adversarial reviews of some work — one from Claude (latest Opus, xhigh) and one from Codex (gpt-5.6-sol, xhigh), running as separate processes — then reconcile their findings and either fix them or bring a clear recommendation to the user.
+
+This skill runs from **either** agent. The two reviewers are always the same; only the mechanism for launching each one changes, because one of them is whichever agent you already are. Section 4 tells you which half you run locally and which half you delegate.
 
 Use this to pressure-test a solution: find bugs, unhandled cases, over-engineering, security holes, and — importantly — architectural/refactoring problems that are better fixed *before* building further. It is equally valid for the user to invoke this manually or for you to invoke it yourself when you want confidence that a big change is correct, simple, and complete.
 
@@ -31,7 +33,9 @@ Assemble a concise brief both reviewers will receive. Include:
 - The **diff or relevant file paths** (reviewers have repo read access and can open more).
 - The **review mandate** (section 3).
 
-Write the brief to a scratchpad file so it can be passed to the codex CLI cleanly.
+Write the brief to a scratchpad file. Both reviewers read the same file, and a delegated CLI run needs it on disk anyway.
+
+Pick a writable scratch directory first and set `$SCRATCH` to it — the commands below assume it exists. Use your own scratchpad dir if you have one, otherwise a temp dir. You need somewhere writable for both the brief and each reviewer's output file; if nothing is writable, say so and stop rather than running reviews you cannot capture.
 
 ## 3. The review mandate (give this to BOTH reviewers)
 
@@ -50,28 +54,45 @@ Write the brief to a scratchpad file so it can be passed to the codex CLI cleanl
 
 ## 4. Run the two reviewers in parallel
 
-Launch both in a **single message** so they run concurrently.
+Both reviewers get the same brief and the same mandate. Start them concurrently — never wait for one to finish before starting the other — and collect both before synthesizing.
 
-**Reviewer A — Claude (latest Opus, xhigh):** use the `Agent` tool with `model: "opus"` and `subagent_type: "general-purpose"`. `model: "opus"` always resolves to the latest Opus — do not pin a specific version. Pass the full brief and the review mandate. Instruct it to read the relevant code itself for context and return its findings in the format above. (This session runs at high reasoning effort so the subagent reviews deeply; if you can set effort explicitly, use xhigh.)
+First work out which agent you are, then follow that row. Do not run the other row.
 
-**Reviewer B — Codex (gpt-5.6-sol, xhigh):** shell out to the codex CLI via `Bash`. Write the brief to a file first, then run (adjust the message file path to the scratchpad):
+| You are | Reviewer A (Claude) | Reviewer B (Codex) |
+| --- | --- | --- |
+| **Claude Code** | run locally, via the `Agent` tool | delegate across, via the `codex` skill |
+| **Codex** | delegate across, via the `claude-code` skill | run locally, via a nested `codex exec` |
 
-```bash
-codex exec \
-  -m gpt-5.6-sol \
-  -c model_reasoning_effort="xhigh" \
-  -s read-only \
-  --skip-git-repo-check \
-  -o "$SCRATCH/codex-review.md" \
-  "$(cat "$SCRATCH/review-brief.md")" < /dev/null
-```
+**Launching them concurrently.** In Claude Code, put both tool calls in a single message. In Codex, start the delegated CLI run in the background and work the local reviewer while it runs.
 
-Then read `$SCRATCH/codex-review.md` for Codex's findings. Notes:
-- `-s read-only` keeps the reviewer from modifying the tree — it only reads and reports.
-- `--skip-git-repo-check` avoids codex refusing to run when the working dir isn't a codex-trusted directory; `< /dev/null` prevents it from blocking on stdin.
-- Codex runs in the current repo, so it can open files and inspect the diff directly; still give it the explicit scope in the brief.
-- Prefer running the codex command in the background (or accept that it may take a few minutes) so it overlaps with Reviewer A. Collect both before synthesizing.
-- If the `codex` binary is missing or errors, report that Reviewer B was unavailable and proceed with Reviewer A's findings rather than aborting.
+### Reviewer A — Claude (latest Opus, xhigh)
+
+- **From Claude Code (local):** use the `Agent` tool with `model: "opus"` and `subagent_type: "general-purpose"`. `model: "opus"` always resolves to the latest Opus — do not pin a version. Pass the full brief and mandate, and tell it to read the relevant code itself. If you can set reasoning effort explicitly, use xhigh.
+- **From Codex (delegated):** load your `claude-code` skill and follow it. Use its read-only recipe — the reviewer must not modify the tree — and select the latest Opus at xhigh effort. Take the flag spellings from that skill, not from here. Pass the brief contents as the prompt.
+
+### Reviewer B — Codex (gpt-5.6-sol, xhigh)
+
+- **From Codex (local):** run a nested `codex exec` as a sub agent. There is deliberately no `codex` skill installed for Codex — an agent does not carry a skill for invoking itself — so the flags for this one route are given here and this file is their source of truth:
+
+  ```bash
+  codex exec -m gpt-5.6-sol -c model_reasoning_effort="xhigh" -s read-only \
+    --skip-git-repo-check -o "$SCRATCH/codex-review.md" \
+    "$(cat "$SCRATCH/review-brief.md")" < /dev/null > "$SCRATCH/codex-review.log" 2>&1 &
+  ```
+
+  The trailing `&` backgrounds it so Reviewer A runs at the same time. Wait for it before synthesizing, and read the findings from `-o`, not from the log.
+
+  Give it the mandate verbatim so it reviews independently rather than agreeing with you — a nested run of the same model is only worth having if it reasons from the brief, not from your conclusions.
+- **From Claude Code (delegated):** load your `codex` skill and follow it. Use `-m gpt-5.6-sol`, `-c model_reasoning_effort="xhigh"`, `-s read-only`, and capture the answer with `-o`.
+
+### Rules that apply to both, whichever agent you are
+
+- **This file chooses the model and effort; the launcher skill chooses the mechanics.** Model (latest Opus, gpt-5.6-sol), effort (xhigh), and read-only scope are review decisions and are set here. Everything else — flag names, output capture, stdin handling — comes from the `codex` or `claude-code` skill for a delegated run, because those are kept current against the installed CLIs. The one exception is Codex's own nested run above, which has no skill to read, so this file is authoritative for it.
+- **Pass the brief as the prompt argument's contents, not as a path.** Neither CLI reads a file path given as the prompt. Use command substitution: `"$(cat "$SCRATCH/review-brief.md")"`.
+- **Read-only.** Neither reviewer may modify the tree. It reads and reports.
+- **Run it unpiped and in the background.** At xhigh a review takes minutes. Never pipe a delegated run through `tail`, `head`, or `tee` — you lose the completion signal and cannot tell a finished run from a running one. Redirect to a file and read the file.
+- **Both reviewers can open files themselves,** so give scope and paths rather than pasting the whole codebase. Still state the scope explicitly in the brief.
+- **If either reviewer is unavailable** — binary missing, not authenticated, command errors, empty output — say so plainly and proceed with whichever review you did get, rather than aborting. This applies to the local nested run as much as the delegated one. Report that the review was one-sided; never present it as a two-reviewer result.
 
 ## 5. Reconcile the findings
 
