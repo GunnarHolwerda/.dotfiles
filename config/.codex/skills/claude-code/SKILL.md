@@ -18,7 +18,7 @@ claude -p "$(cat "$SCRATCH/claude-prompt.md")" \
   --tools "Read,Grep,Glob" \
   --permission-mode bypassPermissions \
   --output-format text \
-  > "$SCRATCH/claude-out.md" 2>&1
+  < /dev/null > "$SCRATCH/claude-out.md" 2>&1
 ```
 
 Then read `$SCRATCH/claude-out.md` for the final answer. (`$SCRATCH` = your scratchpad dir.)
@@ -36,6 +36,7 @@ Unlike `codex exec`, `-p` prints **only** the final message — there is no inte
 - `--json-schema <schema>` — validate structured output against a JSON Schema. Use when you need to parse the answer rather than read it.
 - `--max-budget-usd <amount>` — hard cap on what a run may spend. Worth setting when you hand over an open-ended task.
 - `--append-system-prompt <text>` — bolt an extra mandate onto the default system prompt, for example an adversarial review stance.
+- `< /dev/null` — redirect stdin from nothing. Without it the run waits ~3s for stdin, then prints `Warning: no stdin data received in 3s, proceeding without it`. It costs you that delay on every call.
 - `-r` / `--resume <id>` — resume a specific run by session id. `-c` / `--continue` is a different flag: it continues the most recent conversation in the current directory. With `--output-format json` you get the `session_id` back, so a follow-up question can reuse the context instead of paying for it again.
 
 **Do not use `--dangerously-skip-permissions`.** `--permission-mode bypassPermissions` with a narrow `--tools` list gives you an unattended run without handing over the whole machine.
