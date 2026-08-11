@@ -106,6 +106,12 @@ function symlink_personal_skills() {
         "$HOME/.agents/skills"
         "${CODEX_HOME:-$HOME/.codex}/skills"
     )
+    # An agent should not carry a skill describing how to invoke itself; it
+    # invites recursive self-delegation. Entries are "<skill name>:<target dir>".
+    local skill_target_excludes=(
+        "codex:${CODEX_HOME:-$HOME/.codex}/skills"
+        "claude-code:$HOME/.claude/skills"
+    )
     local has_skills=0
 
     for skills_src in "${skill_sources[@]}"; do
@@ -143,9 +149,23 @@ function symlink_personal_skills() {
 
             skill_name="${skill##*/}"
             for skills_dir in "${skill_targets[@]}"; do
+                local excluded=0
+                for exclude in "${skill_target_excludes[@]}"; do
+                    if [[ "$skill_name:$skills_dir" == "$exclude" ]]; then
+                        excluded=1
+                        break
+                    fi
+                done
                 log "    removing: rm -rf $skills_dir/$skill_name"
                 if [[ $DRY_RUN == "0" ]]; then
                     rm -rf "$skills_dir/$skill_name"
+                fi
+
+                # Removed above but not relinked, so a machine installed before
+                # the exclusion existed converges on the next run.
+                if [[ $excluded == "1" ]]; then
+                    log "    skipping: $skill_name in $skills_dir (self-skill)"
+                    continue
                 fi
 
                 log "    symlinking: ln -s $skill $skills_dir/$skill_name"
