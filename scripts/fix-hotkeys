@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage: fix-hotkeys
+
+Helps fix hotkeys that are not working as expected by finding processes that
+hold macOS Secure Input and offering to terminate them.
+
+Options:
+  -h, --help  Show this help text.
+EOF
+}
+
+case "${1:-}" in
+  -h|--help)
+    usage
+    exit 0
+    ;;
+  "")
+    ;;
+  *)
+    echo "Unknown option: $1" >&2
+    usage >&2
+    exit 2
+    ;;
+esac
+
+if [[ "$(uname -s)" != "Darwin" ]]; then
+  echo "fix-hotkeys only supports macOS." >&2
+  exit 1
+fi
+
+secure_input_pids=()
+while IFS= read -r pid; do
+  secure_input_pids+=("$pid")
+done < <(
+  ioreg -l -w 0 \
+    | sed -nE 's/.*"kCGSSessionSecureInputPID"=([0-9]+).*/\1/p' \
+    | sort -un
+)
+
+if [[ ${#secure_input_pids[@]} -eq 0 ]]; then
+  echo "No process is currently holding macOS Secure Input."
+  exit 0
+fi
+
+for pid in "${secure_input_pids[@]}"; do
+  if ! executable=$(ps -p "$pid" -o comm=); then
+    echo "Secure Input references stale PID $pid; no matching process is running."
+    continue
+  fi
+
+  process_name=$(basename "$executable")
+  if ! command=$(ps -p "$pid" -o command=); then
+    echo "$process_name exited before it could be inspected."
+    continue
+  fi
+
+  echo "Secure Input is held by $process_name (PID $pid)."
+  echo "Command: $command"
+
+  if [[ "$executable" == /System/* ]]; then
+    echo "Warning: this is a macOS system process; terminating it may log you out."
+  fi
+
+  read -r -p "Terminate $process_name with SIGTERM? [y/N] " reply
+  case "$reply" in
+    y|Y)
+      if kill -TERM "$pid"; then
+        echo "Sent SIGTERM to $process_name (PID $pid)."
+      else
+        echo "Could not terminate $process_name (PID $pid)." >&2
+      fi
+      ;;
+    *)
+      echo "Left $process_name running."
+      ;;
+  esac
+done
