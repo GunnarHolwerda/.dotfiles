@@ -47,6 +47,7 @@ Pick a writable scratch directory first and set `$SCRATCH` to it — the command
 > - **Over-complication** — needless abstraction, indirection, or complexity that should be simplified.
 > - **Simplifications** — concrete ways to make the code smaller, clearer, or more direct without losing behavior.
 > - **Architecture & refactoring-before-implementation** — where the current shape fights the rest of the codebase, and a refactor done *now* (before building further on it) would yield a materially better, more consistent design. Call these out strongly when they matter.
+> - **Domain ownership and write paths** — trace aggregate mutations back to the service that owns the domain. Flag coordinating services that directly mutate another domain's repository or duplicate its invariants, especially when this creates competing write paths. Recommend a domain command when it centralizes meaningful rules or transaction boundaries; do not add pass-through service methods merely to enforce one-service-per-repository.
 > - **Security** — injection, authz/authn gaps, unsafe input handling, secret exposure, unsafe defaults.
 > - **Consistency** — divergence from existing patterns, conventions, and idioms in this codebase.
 >

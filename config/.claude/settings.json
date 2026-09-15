@@ -157,7 +157,41 @@
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true,
+  "autoMode": {
+    "soft_deny": [
+      "$defaults",
+      "Bash(terraform apply:*) in /Users/gunnar/code/aws-iam-identity-center when targeting production or staging accounts",
+      "Bash(aws:*) IAM Identity Center writes (create-account-assignment, delete-account-assignment, put-permission-boundary, etc.) in this repo's context"
+    ],
+    "environment": [
+      "### Org-wide",
+      "**Organization**: EM1-Technologies (github.com/EM1-Technologies)",
+      "**Cloud provider(s)**: AWS (this repo manages AWS IAM Identity Center via Terraform)",
+      "**Repository visibility**: internal (EM1-Technologies/aws-iam-identity-center) — treat as private-scoped, not public",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: main (protected — ruleset \"Require PRs to merge to main branch\" active on EM1-Technologies/aws-iam-identity-center)",
+      "**CI/CD deploy targets**: GitHub Actions manual workflow (.github/workflows/terraform.yml) running terraform init/plan/apply against AWS via AWS_ROLE_ARN",
+      "**Network posture**: None configured",
+      "**Source control**: EM1-Technologies/aws-iam-identity-center on github.com (origin) — no additional orgs configured",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: Terraform state and config controlling AWS IAM Identity Center access (backend.tf, main.tf, variables.tf, outputs.tf, modules/aws-baseline-identity-center/*, modules/identity-center-access/*, client.auto.tfvars, group-members.auto.tfvars, account-exceptions.auto.tfvars) — IAM group/permission-set/account-assignment definitions and user email mappings; share only with EM1-Technologies engineers with access to this repo",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: AWS accounts named production/staging referenced in this repo (admin_account_names, readonly_account_names, security_audit_account_names include production and staging) — plus the general default: any namespace, host, or container whose name carries prod or production as a whole word or name segment",
+      "**Protected deployment namespaces / environments**: production and staging AWS accounts managed by this repo's Terraform (administrators/readonly/security_auditors baseline groups and account-exceptions.auto.tfvars engineers exception grant AdministratorAccess there)",
+      "**Protected IaC scopes**: this repo's Terraform for IAM Identity Center groups, permission sets, and account assignments (main.tf, modules/aws-baseline-identity-center, modules/identity-center-access) — plus the general default: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries prod or production as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development (Terraform/AWS IAM Identity Center administration)",
+      "**Trusted repo**: /Users/gunnar/code/aws-iam-identity-center and its remote origin (github.com:EM1-Technologies/aws-iam-identity-center.git) — internal visibility; content ported from other repos or sessions is not this repo's own work",
+      "**Org-specific CLIs**: None configured",
+      "routine terraform/aws CLI usage under this repo's working directory is expected for read/plan operations"
+    ]
+  },
   "feedbackSurveyState": {
     "lastShownTime": 1754071598024
-  }
+  },
+  "model": "claude-fable-5-1[1m]"
 }

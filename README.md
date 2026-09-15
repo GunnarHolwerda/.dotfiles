@@ -30,3 +30,13 @@ I decided that the way I would structure this is actually keep the program insta
 ```bash
 ./ubuntu
 ```
+
+## Personal tools
+
+Local utilities and Raycast extensions live in the pnpm workspace under [`tools/`](tools/README.md).
+
+```bash
+cd tools
+pnpm install
+pnpm build
+```

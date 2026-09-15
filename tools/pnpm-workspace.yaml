@@ -1,0 +1,8 @@
+packages:
+  - "*"
+
+allowBuilds:
+  esbuild: true
+
+minimumReleaseAgeExclude:
+  - '@raycast/api@2.4.1'

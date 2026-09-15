@@ -4,31 +4,16 @@
     "linear-server": {
       "url": "https://mcp.linear.app/mcp"
     },
-    "linear": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote",
-        "https://mcp.linear.app/mcp"
-      ]
-    },
     "sentry": {
       "url": "https://mcp.sentry.dev/mcp"
     },
     "chrome-devtools": {
       "command": "npx",
-      "args": [
-        "chrome-devtools-mcp@latest"
-      ]
+      "args": ["chrome-devtools-mcp@latest"]
     }
   },
   "amp.mcp.disable": [],
   "amp.tools.disable": [],
-  "amp.commands.allowlist": [
-    "pnpm",
-    "git",
-    "gh",
-    "rm"
-  ],
+  "amp.commands.allowlist": ["pnpm", "git", "gh", "rm"],
   "amp.dangerouslyAllowAll": true
 }

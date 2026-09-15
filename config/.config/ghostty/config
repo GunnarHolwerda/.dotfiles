@@ -3,6 +3,7 @@ font-size = 12
 theme = 0x96f
 shell-integration = zsh
 cursor-style = block
+auto-update-channel = tip
 
 bell-features = title,border
 
@@ -18,6 +19,9 @@ unfocused-split-opacity = 0.67
 
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
 quick-terminal-position = bottom
+# height,width -- the secondary axis is maximized unless given, which is what
+# made this span the full screen width.
+quick-terminal-size = 30%,60%
 keybind = ctrl+a>r=reload_config
 keybind = ctrl+a>shift+n=new_window
 keybind = ctrl+a>n=new_tab
