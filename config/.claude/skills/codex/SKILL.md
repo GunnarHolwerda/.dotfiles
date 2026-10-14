@@ -41,7 +41,7 @@ Then read `$SCRATCH/codex-out.md` for Codex's final answer. (`$SCRATCH` = your s
 
 - Codex has repo read access and can open files itself — give it explicit scope (paths, diff range, the specific question) and let it read for context.
 - Be explicit about the deliverable and format you want back, since the `-o` file is the raw final message with no further shaping.
-- For a code review, hand it the same kind of adversarial mandate the `[[improvement-review]]` skill uses (correctness, security, over-complication, simplification, architecture, consistency).
+- For a code review, give it an adversarial mandate (correctness, security, over-complication, simplification, architecture, consistency).
 
 ## Running it well
 

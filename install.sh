@@ -137,6 +137,16 @@ function symlink_personal_skills() {
         if [[ $DRY_RUN == "0" ]]; then
             mkdir -p "$skills_dir"
         fi
+
+        # Drop links to skills that were deleted from the repo.
+        for link in "$skills_dir"/*; do
+            if [[ -L "$link" && ! -e "$link" && "$(readlink "$link")" == "$REPO_DIR/config/"* ]]; then
+                log "    pruning: rm $link"
+                if [[ $DRY_RUN == "0" ]]; then
+                    rm "$link"
+                fi
+            fi
+        done
     done
 
     for skills_src in "${skill_sources[@]}"; do
